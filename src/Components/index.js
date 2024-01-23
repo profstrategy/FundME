@@ -1,16 +1,20 @@
 import User from "./User";
 import BorrowForm from "./BorrowForm";
 import AddUser from "./AddUser";
-import UserProfile from './UserProfile';
+import Deposit from './Deposit';
 import Cover from "./Cover";
-import Modal from "./Modal"
+import BorrowBank from "./BorrowBank";
+import BorrowScope from "./BorrowScope";
+import ButtonScope from "./ButtonScope";
 
 
 export {
     User,
     BorrowForm,
     AddUser,
-    UserProfile,
+    Deposit,
     Cover,
-    Modal
+    BorrowBank,
+    BorrowScope,
+    ButtonScope
 }

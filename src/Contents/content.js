@@ -1,5 +1,5 @@
 
-import { angleDown } from "../assets"
+import { angleUp } from "../assets"
 
 export const initialUsers = [
     {
@@ -7,7 +7,7 @@ export const initialUsers = [
         name: "Abdulrahman",
         image: "https://i.pravatar.cc/48?u=499476",
         balance: 0,
-        icon: angleDown
+        icon: angleUp
     },
 
     {
@@ -15,7 +15,7 @@ export const initialUsers = [
         name: "Jonas",
         image: "https://i.pravatar.cc/48?u=933372",
         balance: 10,
-        icon: angleDown
+        icon: angleUp
     },
 
     {
@@ -23,6 +23,6 @@ export const initialUsers = [
         name: "Abdul",
         image: "https://i.pravatar.cc/48?u=118836",
         balance: 100,
-        icon: angleDown
+        icon: angleUp
     }
 ]

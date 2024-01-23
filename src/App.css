@@ -4,3 +4,12 @@ body{
   margin: 0;
   background-color: black;
 }
+
+
+.imgLeft {
+  transform: translateX(20%);
+}
+
+.imgRight {
+  transform: translateX(0%);
+}
