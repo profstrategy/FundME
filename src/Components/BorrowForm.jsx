@@ -27,7 +27,7 @@ const BorrowForm = ({ showBorrowFriend }) => {
               <h6 className='text-black m-auto'>You want to borrow from x</h6>
             </div>
           </Cover>
-          <div className={`bg-white col-span-1 ${showBorrowFriend ?  '' : ''} rounded-lg h-auto w-full shadow-md shadow-zinc-300 pb-3 pt-3`}>
+          <div className={`bg-white rounded-lg h-auto w-full shadow-md shadow-zinc-300 pb-3 pt-3`}>
             <BorrowScope
               bgColor='white'
               height='auto'
