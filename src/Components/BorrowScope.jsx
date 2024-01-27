@@ -1,12 +1,10 @@
 import React from 'react'
 
-const BorrowScope = ({ height, bgColor, py, children, px,  }) => {
+const BorrowScope = ({ children  }) => {
 
   return (
-    <div className='bg-white rounded-md'>
-      <form className={`w-full grid gap-3 bg-${bgColor} px-${px} py-${py} h-${height}`}>
-        {children}
-      </form>
+    <div className='rounded-md h-fit'>
+     {children}
     </div>
   )
 }
