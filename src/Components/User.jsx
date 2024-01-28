@@ -5,13 +5,12 @@ import { ButtonScope, Cover } from '../Components'
 import { initialUsers } from '../Contents/content'
 
 
-const UserProfile = ({ user, handleShowBorrowFriend, handleBorrowBank }) => {
+const UserProfile = ({ user, handleShowBorrowFriend, handleShowBorrowBank, handleShowDeposit }) => {
 
-  const [openModal, setOpenModal] = useState(false)
+  const [openModal, setOpenModal] = useState(0)
   const [iconList, setIconList] = useState(false)
 
   const handleOpenModal = () => {
-
     setOpenModal(openModal => !openModal)
     setIconList(!iconList)
   }
@@ -25,15 +24,15 @@ const UserProfile = ({ user, handleShowBorrowFriend, handleBorrowBank }) => {
           <h5 className='text-white'>{user.name}</h5>
           <img src={`${iconList ? angleDown : user.icon}`} onClick={handleOpenModal} className='cursor-pointer' />
         </li>
-        {openModal &&
-          <div className='grid grid-cols-1'>
+        {openModal >=  +1 ?
+          <div className='grid grid-cols-1 search'>
             <div className='w-full col-end-3 flex flex-col h-auto gap-1 px-3 bg-stone-50 py-2 rounded-md shadow-lg shadow-zinc-500 mt-2'>
 
               <li className={`hover:bg-zinc-300 text-center cursor-pointer rounded-md px-2 border-b-2 list-none`} onClick={handleShowBorrowFriend}>Borrow from friend</li>
-              <li className='hover:bg-zinc-300 text-center cursor-pointer rounded-md px-2 border-b-2 transition ease-in-out delay-150 list-none' onClick={handleBorrowBank}>Borrow from Bank</li>
-              <li className='hover:bg-zinc-300 text-center cursor-pointer rounded-md px-2 border-b-2 transition ease-in-out delay-150 list-none'>Make a Deposit</li>
+              <li className='hover:bg-zinc-300 text-center cursor-pointer rounded-md px-2 border-b-2 transition ease-in-out delay-150 list-none' onClick={handleShowBorrowBank}>Borrow from Bank</li>
+              <li className='hover:bg-zinc-300 text-center cursor-pointer rounded-md px-2 border-b-2 transition ease-in-out delay-150 list-none' onClick={handleShowDeposit}>Make a Deposit</li>
             </div>
-          </div>
+          </div> : ''
         }
 
         <div className='grid grid-cols-2 w-full items-center shadow-lg shadow-zinc-500 mt-2 px-2'>
@@ -47,13 +46,13 @@ const UserProfile = ({ user, handleShowBorrowFriend, handleBorrowBank }) => {
   )
 }
 
-const User = ({ handleUserOpen, handleShowBorrowFriend, showUser, handleBorrowBank }) => {
+const User = ({ handleUserOpen, handleShowBorrowFriend, showUser, handleShowBorrowBank, handleShowDeposit }) => {
 
   if (window.innerWidth <= 640) {
     return (
 
       <>
-        {
+        {showUser &&
           <div>
             <Cover
               color='black'
@@ -75,7 +74,7 @@ const User = ({ handleUserOpen, handleShowBorrowFriend, showUser, handleBorrowBa
                 <img src={user} alt='user' className='col-start-7 object-contain' />
               </div>
               {initialUsers.map((user) => (
-                <UserProfile user={user} key={user.id} handleShowBorrowFriend={handleShowBorrowFriend} handleBorrowBank={handleBorrowBank} />
+                <UserProfile user={user} key={user.id} handleShowBorrowFriend={handleShowBorrowFriend} handleShowBorrowBank={handleShowBorrowBank} handleShowDeposit={handleShowDeposit} />
               ))}
 
               <div className='grid justify-end px-3'>
@@ -87,8 +86,8 @@ const User = ({ handleUserOpen, handleShowBorrowFriend, showUser, handleBorrowBa
           </div>
         }    </>
 
-    )
-  } else {
+    )}else {
+
     return (
 
       <div>
@@ -112,7 +111,7 @@ const User = ({ handleUserOpen, handleShowBorrowFriend, showUser, handleBorrowBa
             <img src={user} alt='user' className='col-start-7 object-contain' />
           </div>
           {initialUsers.map((user) => (
-            <UserProfile user={user} key={user.id} handleShowBorrowFriend={handleShowBorrowFriend} />
+            <UserProfile user={user} key={user.id} handleShowBorrowFriend={handleShowBorrowFriend} handleShowBorrowBank={handleShowBorrowBank} handleShowDeposit={handleShowDeposit}/>
           ))}
 
           <div className='grid justify-end px-3'>
@@ -122,8 +121,10 @@ const User = ({ handleUserOpen, handleShowBorrowFriend, showUser, handleBorrowBa
           </div>
         </div>
       </div>
+          
     )
-  }
+          }
+          
 }
 
 

@@ -6,6 +6,7 @@ import Cover from "./Cover";
 import BorrowBank from "./BorrowBank";
 import BorrowScope from "./BorrowScope";
 import ButtonScope from "./ButtonScope";
+import Navbar from "./Navbar";
 
 
 export {
@@ -16,5 +17,6 @@ export {
     Cover,
     BorrowBank,
     BorrowScope,
-    ButtonScope
+    ButtonScope,
+    Navbar
 }

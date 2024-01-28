@@ -23,7 +23,7 @@ const BorrowForm = ({ showBorrowFriend, setShowUser }) => {
           >
             <div className='flex items-center px-1 h-10'>
               <div className='bg-black flex rounded-full justify-center h-5 cursor-pointer'>
-                <img src={`${showIcon ? minus : plus}`} className='w-5' onClick={handleShowIcon} />
+                <img src={`${showIcon ? minus : plus}`} className='w-5 visible sm:hidden' onClick={handleShowIcon} />
               </div>
               <h6 className='text-black m-auto'>you want to borrow from x</h6>
             </div>

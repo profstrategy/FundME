@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { Cover, ButtonScope } from '../Components';
 import { minus, plus } from '../assets';
 
-const BorrowBank = ({ borrowBank, setShowUser }) => {
+const BorrowBank = ({ showBorrowBank, setShowUser }) => {
     const [showIcon, setShowIcon] = useState(plus)
 
     const handleShowIcon = () => {
@@ -12,7 +12,7 @@ const BorrowBank = ({ borrowBank, setShowUser }) => {
     }
     return (
         <>
-            {borrowBank &&
+            {showBorrowBank &&
                 <div className='mt-5 md:mt-0'>
                     <Cover
                         color='black'
@@ -23,7 +23,7 @@ const BorrowBank = ({ borrowBank, setShowUser }) => {
                     >
                         <div className='flex items-center px-1 h-10'>
                             <div className='bg-black flex rounded-full justify-center h-5 cursor-pointer'>
-                                <img src={`${showIcon ? minus : plus}`} className='w-5' onClick={handleShowIcon} />
+                                <img src={`${showIcon ? minus : plus}`} className='w-5 visible sm:hidden' onClick={handleShowIcon} />
                             </div>
                             <h6 className='text-black m-auto'>You want to borrow from FundME account</h6>
                         </div>
