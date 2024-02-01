@@ -3,16 +3,17 @@ import React, { useState } from 'react';
 import { Cover, ButtonScope } from '../Components';
 import { minus, plus } from '../assets';
 
-const BorrowForm = ({ showBorrowFriend, setShowUser }) => {
+const BorrowForm = ({ borrowFriend }) => {
   const [showIcon, setShowIcon] = useState(plus)
+
 
   const handleShowIcon = () => {
     setShowIcon(!showIcon)
-    setShowUser(showUser => !showUser)
+    
   }
   return (
     <>
-      {showBorrowFriend &&
+      {
         <div className={`mt-5 md:mt-0`}>
           <Cover
             color='black'
@@ -25,7 +26,7 @@ const BorrowForm = ({ showBorrowFriend, setShowUser }) => {
               <div className='bg-black flex rounded-full justify-center h-5 cursor-pointer'>
                 <img src={`${showIcon ? minus : plus}`} className='w-5 visible sm:hidden' onClick={handleShowIcon} />
               </div>
-              <h6 className='text-black m-auto'>you want to borrow from x</h6>
+              <h6 className='text-black m-auto'>you want to borrow from {borrowFriend.name} </h6>
             </div>
           </Cover>
           <div className={`bg-white rounded-lg h-auto w-full shadow-md shadow-zinc-300 pb-3 pt-3`}>

@@ -1,38 +1,56 @@
-import React, { useState } from 'react';
+import React, { useReducer, useEffect } from 'react';
 
-import { user, angleDown } from '../assets';
-import { ButtonScope, Cover } from '../Components'
-import { initialUsers } from '../Contents/content'
+import { user, angleDown, angleUp } from '../assets';
+import { ButtonScope, Cover } from '../Components';
 
 
-const UserProfile = ({ user, handleShowBorrowFriend, handleShowBorrowBank, handleShowDeposit }) => {
-
-  const [openModal, setOpenModal] = useState(0)
-  const [iconList, setIconList] = useState(false)
-
-  const handleOpenModal = () => {
-    setOpenModal(openModal => !openModal)
-    setIconList(!iconList)
+function reducer(state, action) {
+  // console.log(state, action)
+  switch (action.type) {
+    case "icon":
+      return { ...state, icon: !state.icon }
+    case "modal":
+      return { ...state, modal: !state.modal }
+    default:
+      return state;
   }
+}
+
+const initialState = { modal: false, icon: false }
+
+const UserProfile = ({ user, onToggleBorrowFriend, onToggleBorrowBank, onToggleDeposit }) => {
+  const [state, dispatch] = useReducer(reducer, initialState)
+  const { modal, icon } = state
+
+  // useEffect(() => {
+  //   dispatch({ type: "icon" })
+  //   dispatch({ type: "modal" })
+
+  //   window.addEventListener('click', dispatch)
+  // }, [dispatch])
+
 
   return (
     <div className='py-3 px-3'>
       <>
-        <li className='list-none flex text-initial justify-between px-2 items-center bg-gray-950 rounded-lg mt-2' key={user.id}>
+        <li className='list-none flex text-initial justify-between px-2 items-center bg-gray-950 rounded-lg mt-2'>
 
           <img className='rounded-full' src={user.image} />
           <h5 className='text-white'>{user.name}</h5>
-          <img src={`${iconList ? angleDown : user.icon}`} onClick={handleOpenModal} className='cursor-pointer' />
+          <img src={`${icon ? angleDown : angleUp}`} className='cursor-pointer' onClick={() => {
+            dispatch({ type: "icon" });
+            dispatch({ type: "modal" });
+          }} />
         </li>
-        {openModal >=  +1 ?
+        {modal &&
           <div className='grid grid-cols-1 search'>
             <div className='w-full col-end-3 flex flex-col h-auto gap-1 px-3 bg-stone-50 py-2 rounded-md shadow-lg shadow-zinc-500 mt-2'>
 
-              <li className={`hover:bg-zinc-300 text-center cursor-pointer rounded-md px-2 border-b-2 list-none`} onClick={handleShowBorrowFriend}>Borrow from friend</li>
-              <li className='hover:bg-zinc-300 text-center cursor-pointer rounded-md px-2 border-b-2 transition ease-in-out delay-150 list-none' onClick={handleShowBorrowBank}>Borrow from Bank</li>
-              <li className='hover:bg-zinc-300 text-center cursor-pointer rounded-md px-2 border-b-2 transition ease-in-out delay-150 list-none' onClick={handleShowDeposit}>Make a Deposit</li>
+              <li className={`hover:bg-zinc-300 text-center cursor-pointer rounded-md px-2 border-b-2 list-none`} onClick={() => {onToggleBorrowFriend(user)}}>Borrow from friend</li>
+              <li className='hover:bg-zinc-300 text-center cursor-pointer rounded-md px-2 border-b-2 transition ease-in-out delay-150 list-none' onClick={() => onToggleBorrowBank(user)}>Borrow from Bank</li>
+              <li className='hover:bg-zinc-300 text-center cursor-pointer rounded-md px-2 border-b-2 transition ease-in-out delay-150 list-none' onClick={() => onToggleDeposit(user)}>Make a Deposit</li>
             </div>
-          </div> : ''
+          </div>
         }
 
         <div className='grid grid-cols-2 w-full items-center shadow-lg shadow-zinc-500 mt-2 px-2'>
@@ -46,13 +64,13 @@ const UserProfile = ({ user, handleShowBorrowFriend, handleShowBorrowBank, handl
   )
 }
 
-const User = ({ handleUserOpen, handleShowBorrowFriend, showUser, handleShowBorrowBank, handleShowDeposit }) => {
+const User = ({ onToggleBorrowFriend, onToggleBorrowBank, onToggleDeposit, onToggleAddFriends, friends }) => {
 
   if (window.innerWidth <= 640) {
     return (
 
       <>
-        {showUser &&
+        {
           <div>
             <Cover
               color='black'
@@ -73,20 +91,21 @@ const User = ({ handleUserOpen, handleShowBorrowFriend, showUser, handleShowBorr
                 <h1 className='col-end-2'>Users</h1>
                 <img src={user} alt='user' className='col-start-7 object-contain' />
               </div>
-              {initialUsers.map((user) => (
-                <UserProfile user={user} key={user.id} handleShowBorrowFriend={handleShowBorrowFriend} handleShowBorrowBank={handleShowBorrowBank} handleShowDeposit={handleShowDeposit} />
+              {friends.map((user) => (
+                <UserProfile user={user} key={user.id} onToggleBorrowBank={onToggleBorrowBank} onToggleDeposit={onToggleDeposit} onToggleAddFriends={onToggleAddFriends} onToggleBorrowFriend={onToggleBorrowFriend} />
               ))}
 
               <div className='grid justify-end px-3'>
                 <ButtonScope
-                  onClick={handleUserOpen}
+                  onClick={onToggleAddFriends}
                 >ADD USERS</ButtonScope>
               </div>
             </div>
           </div>
         }    </>
 
-    )}else {
+    )
+  } else {
 
     return (
 
@@ -110,21 +129,21 @@ const User = ({ handleUserOpen, handleShowBorrowFriend, showUser, handleShowBorr
             <h1 className='col-end-2'>Users</h1>
             <img src={user} alt='user' className='col-start-7 object-contain' />
           </div>
-          {initialUsers.map((user) => (
-            <UserProfile user={user} key={user.id} handleShowBorrowFriend={handleShowBorrowFriend} handleShowBorrowBank={handleShowBorrowBank} handleShowDeposit={handleShowDeposit}/>
+          {friends.map((user) => (
+            <UserProfile user={user} key={user.id} onToggleBorrowFriend={onToggleBorrowFriend} onToggleBorrowBank={onToggleBorrowBank} onToggleDeposit={onToggleDeposit} onToggleAddFriends={onToggleAddFriends} />
           ))}
 
           <div className='grid justify-end px-3'>
             <ButtonScope
-              onClick={handleUserOpen}
+              onClick={onToggleAddFriends}
             >ADD USERS</ButtonScope>
           </div>
         </div>
       </div>
-          
+
     )
-          }
-          
+  }
+
 }
 
 

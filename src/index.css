@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+/* ${selectBorrowFriend ? 'grid grid-cols-2 lg:w-4/6 md:w-4/6 max-sm:grid-cols-1' : ''}`}
+
+
+${selectBorrowFriend ? ' grid m-auto grid-cols-2 lg:w-4/6 md:w-3/6 max-sm:grid-cols-1' : ''
+          }`}*/
+
+          /* ${showBorrowBank || showBorrowFriend || showDeposit ? 'grid m-auto grid-cols-1 lg:w-5/6 max-sm:grid-cols-1' : ''}` */

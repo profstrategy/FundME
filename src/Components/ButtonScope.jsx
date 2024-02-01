@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ButtonScope = ( {children, ml, onClick}) => {
+const ButtonScope = ( {children, ml, onClick, handleAddUser}) => {
   return (
     <div onClick={onClick}>
       <button className={`bg-blue-800 text-white px-3 py-2 rounded-md ml-${ml}`}>{children}</button>

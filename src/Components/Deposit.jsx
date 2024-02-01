@@ -3,16 +3,16 @@ import React, {useState} from 'react';
 import { Cover, ButtonScope } from '../Components';
 import { minus, plus } from '../assets';
 
-const Deposit = ({ showDeposit, setShowUser }) => {
+const Deposit = ({deposit }) => {
     const [showIcon, setShowIcon] = useState(plus)
 
     const handleShowIcon = () => {
         setShowIcon(!showIcon)
-        setShowUser(showUser => !showUser)
+      
     }
     return (
         <>
-       {showDeposit && <div className='mt-5 md:mt-0'>
+        <div className='mt-5 md:mt-0'>
             <Cover
                 color='black'
                 bgColor='white'
@@ -24,7 +24,7 @@ const Deposit = ({ showDeposit, setShowUser }) => {
                     <div className='bg-black flex rounded-full justify-center h-5 cursor-pointer'>
                         <img src={`${showIcon ? minus : plus}`} className='w-5 visible sm:hidden' onClick={handleShowIcon} />
                     </div>
-                    <h6 className='text-black m-auto'>Make a deposit to your account</h6>
+                    <h6 className='text-black m-auto'>Make a deposit to {deposit.name} account</h6>
                 </div>
             </Cover>
             <div className='bg-white col-span-1 rounded-lg h-auto w-full shadow-md shadow-zinc-300 pb-3 pt-3'>
@@ -37,7 +37,7 @@ const Deposit = ({ showDeposit, setShowUser }) => {
                     >Request</ButtonScope>
                 </div>
             </div>
-        </div>}
+        </div>
         </>
     )
 }

@@ -1,70 +1,112 @@
-import React, { useState } from 'react';
-import { User, AddUser, BorrowForm, BorrowBank, BorrowScope, Deposit, Navbar } from './Components'
+import React, { useReducer } from 'react';
+import { User, AddUser, BorrowForm, BorrowBank, Deposit, Navbar } from './Components'
 import './App.css'
+import { initialUsers } from './Contents/content'
 
 function App() {
-  const [openAddUser, setOpenAddUser] = useState(false);
-  const [showBorrowFriend, setShowBorrowFriend] = useState(false);
-  const [showUser, setShowUser] = useState(true);
-  const [showBorrowBank, setShowBorrowBank] = useState(false)
-  const [showDeposit, setShowDeposit] = useState(false)
+
+  function reducer(state, action) {
+    switch (action.type) {
+      case "toggleBorrowFriend":
+        return {
+          ...state,
+          borrowFriend: !state.borrowFriend ? action.payload : false,
+          borrowBank: false,
+          deposit: false,
+          addFriends: false
+
+        }
+      case "toggleBorrowBank":
+        return {
+          ...state,
+          borrowBank: !state.borrowBank ? action.payload : false,
+          borrowFriend: false,
+          deposit: false,
+          addFriends: false
+
+        }
+      case "toggleDeposit":
+        return {
+          ...state, deposit: !state.deposit ? action.payload : false,
+          borrowBank: false,
+          borrowFriend: false,
+          addFriends: false
+        }
+
+      case "toggleAddFriends":
+        return {
+          ...state,
+          addFriends: !state.addFriends ? action.payload : false,
+          borrowBank: false,
+          borrowFriend: false,
+          deposit: false
+
+        }
+
+      case "addFriends":
+        return {
+          ...state,
+          friends: [...state.friends, action.payload],
+          addFriends: false
+        }
+
+      default:
+        return state
+    }
+  }
+
+  const initialStates = { borrowFriend: false, borrowBank: false, deposit: false, addFriends: false, friends: initialUsers, icon: false, modal: false}
+  const [state, dispatch] = useReducer(reducer, initialStates)
   
 
-  const handleUserOpen = () => {
-    setOpenAddUser((prevOpenAddUser) => !prevOpenAddUser);
-    setShowBorrowFriend('')
-    setShowBorrowBank('')
-  };
+  const { borrowFriend, borrowBank, deposit, addFriends, friends } = state;
 
-  const handleShowBorrowFriend = () => {
+  // const handleShowBorrowBank = () => {
 
-    window.innerWidth <= 640 ? setShowBorrowFriend((prevShowBorrowFriend) => !prevShowBorrowFriend) && setShowUser((prevShowUser) => !prevShowUser) : setShowBorrowFriend((prevShowBorrowFriend) => !prevShowBorrowFriend)
+  //   window.innerWidth <= 640 ? setShowBorrowBank((prevShowBorrowBank) => !prevShowBorrowBank) && setShowUser((prevShowUser) => !prevShowUser) : setShowBorrowBank((prevShowBorrowBank) => !prevShowBorrowBank)
 
-    setShowBorrowBank('')
-    setShowDeposit('')
-    setOpenAddUser('')
-  };
+  //  setSelectBorrowFriend('')
+  //  setShowDeposit('')
+  //   setOpenAddUser('')
+  // };
 
-  const handleShowBorrowBank = () => {
+  // const handleShowDeposit = () => {
 
-    window.innerWidth <= 640 ? setShowBorrowBank((prevShowBorrowBank) => !prevShowBorrowBank) && setShowUser((prevShowUser) => !prevShowUser) : setShowBorrowBank((prevShowBorrowBank) => !prevShowBorrowBank)
+  //   window.innerWidth <= 640 ? setShowDeposit((prevShowDeposit) => !prevShowDeposit) && setShowUser((prevShowUser) => !prevShowUser) : setShowDeposit((prevShowDeposit) => !prevShowDeposit)
 
-   setShowBorrowFriend('')
-   setShowDeposit('')
-    setOpenAddUser('')
-  };
-
-  const handleShowDeposit = () => {
-
-    window.innerWidth <= 640 ? setShowDeposit((prevShowDeposit) => !prevShowDeposit) && setShowUser((prevShowUser) => !prevShowUser) : setShowDeposit((prevShowDeposit) => !prevShowDeposit)
-
-    setShowBorrowBank('')
-    setShowBorrowFriend('')
-    setOpenAddUser('')
-  };
+  //   setShowBorrowBank('')
+  //   setSelectBorrowFriend('')
+  //   setOpenAddUser('')
+  // };
   return (
     <div className=' bg-black'>
-<Navbar />
-      <div className={`mt-16 md:mt-20`}>
+      <Navbar />
+      <div className={`min-h-screen grid grid-cols-1 items-center justify-center`}>
+
         <div
-          className={` w-5/6 sm:w-5/6 md:w-4/6 m-auto lg:w-4/6 gap-5  ${showBorrowFriend || showBorrowBank || showDeposit ? 'grid grid-cols-2 lg:w-4/6 md:w-4/6 max-sm:grid-cols-1' : ''}`}
+          className={` w-4/6 md:w-5/6 lg:w-4/6 relative grid justify-center m-auto gap-3 max-sm:left-4  ${borrowFriend || borrowBank || deposit ? 'grid grid-cols-2 lg:w-4/6 md:w-4/6 max-sm:grid-cols-1' : ''}`}
         >
 
-          <User handleUserOpen={handleUserOpen} handleShowBorrowFriend={handleShowBorrowFriend} showBorrowFriend={showBorrowFriend} showUser={showUser} setShowUser={setShowUser} handleShowBorrowBank={handleShowBorrowBank} handleShowDeposit={handleShowDeposit} />
-          <BorrowScope >
-            <BorrowForm showBorrowFriend={showBorrowFriend} setShowUser={setShowUser} showUser={showUser} />
-            <BorrowBank showBorrowBank={showBorrowBank} setShowUser={setShowUser}/>
-            <Deposit showDeposit={showDeposit} setShowUser={setShowUser} />
-          </BorrowScope>
+          <User onToggleBorrowFriend={(friend) => dispatch({ type: 'toggleBorrowFriend', payload: friend })}
+
+             onToggleDeposit={(friend) => dispatch({ type: "toggleDeposit", payload: friend })}
+             
+             onToggleAddFriends={(friend) => dispatch({ type: "toggleAddFriends", payload: friend })} friends={friends}
+             
+             onToggleBorrowBank={(friend) => dispatch({ type: "toggleBorrowBank", payload: friend })}
+              />
+
+          {borrowFriend && <BorrowForm borrowFriend={borrowFriend} />}
+          {borrowBank && <BorrowBank borrowBank={borrowBank} />}
+          {deposit && <Deposit deposit={deposit}/>}
 
         </div>
       </div>
 
       <div
-        className={` sm:w-5/6 sm:grid-flow-col  w-5/6 sm:w-5/6 md:w-5/6 m-auto lg:w-5/7 mt-5 ${showBorrowFriend || showBorrowBank || showDeposit ? ' grid m-auto grid-cols-2 lg:w-4/6 max-sm:grid-cols-1' : ''
-          }`}
+        className={`w-4/6 m-auto grid grid-cols-1 md:w-3/6 lg:w-2/6 max-sm:left-4 max-sm:relative `}
       >
-        <AddUser openAddUser={openAddUser} showBorrowBank={showBorrowBank} showDeposit={showDeposit} showBorrowFriend={showBorrowFriend} />
+        {addFriends && <AddUser onAddUsers={(friend) => dispatch({ type: "addFriends", payload: friend })} />}
       </div>
     </div>
   );
