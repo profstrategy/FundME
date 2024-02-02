@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 import { Cover, ButtonScope } from '../Components';
 import { minus, plus } from '../assets';

@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import { useReducer, useEffect } from 'react';
 import { User, AddUser, BorrowForm, BorrowBank, Deposit, Navbar } from './Components'
 import './App.css'
 import { initialUsers } from './Contents/content'
@@ -50,16 +50,63 @@ function App() {
           addFriends: false
         }
 
+        case "deleteFriends":
+          return{
+            ...state,
+            friends: state.friends.filter((friend) => friend.id !== action.payload.id)
+          }
+
+          case "lender":
+            return {
+              ...state,
+              lender: action.payload
+            }
+
+            case "amount":
+              return {
+                ...state,
+                amount: action.payload
+              }
+
+              case "selectBorrow":
+                return {
+                  ...state,
+                  friends: state.friends.includes(action.payload)
+                    ? state.friends
+                    : [...state.friends, action.payload],
+                };
+              
+
       default:
         return state
     }
   }
 
-  const initialStates = { borrowFriend: false, borrowBank: false, deposit: false, addFriends: false, friends: initialUsers, icon: false, modal: false}
+  const initialStates = { borrowFriend: false, borrowBank: false, deposit: false, addFriends: false, friends: initialUsers, lender: '', amount: ''}
   const [state, dispatch] = useReducer(reducer, initialStates)
   
 
-  const { borrowFriend, borrowBank, deposit, addFriends, friends } = state;
+  const { borrowFriend, borrowBank, deposit, addFriends, friends, lender, amount } = state;
+
+  const handleIselectedToBorrow = () => {
+    
+
+    const isToBorrow = borrowFriend.name === lender
+    dispatch({type: "selectBorrow", payload: isToBorrow})
+
+    console.log('done')
+  }
+
+  useEffect(() => {
+    handleIselectedToBorrow()
+
+    window.addEventListener('change', handleIselectedToBorrow)
+    return () => {window.removeEventListener('change', handleIselectedToBorrow)}
+  },[ handleIselectedToBorrow, borrowFriend, lender, dispatch ])
+
+  // const handleDeleteFriends = (id) => {
+  //   dispatch(())
+  // }
 
   // const handleShowBorrowBank = () => {
 
@@ -94,9 +141,11 @@ function App() {
              onToggleAddFriends={(friend) => dispatch({ type: "toggleAddFriends", payload: friend })} friends={friends}
              
              onToggleBorrowBank={(friend) => dispatch({ type: "toggleBorrowBank", payload: friend })}
+
+             onDelete={dispatch}
               />
 
-          {borrowFriend && <BorrowForm borrowFriend={borrowFriend} />}
+          {borrowFriend && <BorrowForm borrowFriend={borrowFriend} amount={amount}  dispatchFriendAmt={dispatch} handleIselectedToBorrow={handleIselectedToBorrow} />}
           {borrowBank && <BorrowBank borrowBank={borrowBank} />}
           {deposit && <Deposit deposit={deposit}/>}
 
@@ -104,7 +153,7 @@ function App() {
       </div>
 
       <div
-        className={`w-4/6 m-auto grid grid-cols-1 md:w-3/6 lg:w-2/6 max-sm:left-4 max-sm:relative `}
+        className={`w-4/6 m-auto grid grid-cols-1 md:w-3/6 lg:w-2/6 max-sm:left-4 max-sm:relative mt-4`}
       >
         {addFriends && <AddUser onAddUsers={(friend) => dispatch({ type: "addFriends", payload: friend })} />}
       </div>

@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 
 import { ButtonScope } from '../Components'
-import { angleUp } from '../assets'
+import { angleUp, close } from '../assets'
 
 const AddUser = ({ onAddUsers }) => {
 
@@ -22,7 +22,8 @@ const AddUser = ({ onAddUsers }) => {
       name,
       balance,
       icon: angleUp,
-      image: `${image}?=${id}`
+      image: `${image}?=${id}`,
+      deleteIcon: close
     }
       setImage("https://i.pravatar.cc/48")
       setName('')
