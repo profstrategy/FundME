@@ -1,6 +1,6 @@
 import { useReducer } from 'react';
 
-import { user, angleDown, angleUp } from '../assets';
+import { user, angleDown, angleUp, close } from '../assets';
 import { ButtonScope, Cover } from '../Components';
 
 
@@ -33,10 +33,10 @@ const UserProfile = ({ user, onToggleBorrowFriend, onToggleBorrowBank, onToggleD
   return (
     <div className='py-3 px-7 relative'>
       <>
-        <li className={` list-none flex text-initial justify-between px-2 items-center bg-gray-950 rounded-lg mt-2`}>
+        <li className={`${user.isSelected ? 'bg-green-500' : ''} } list-none flex text-initial justify-between px-2 items-center bg-gray-950 rounded-lg mt-2`}>
 
           <img className='rounded-full' src={user.image} />
-          <h5 className='text-white'>{user.name}</h5>
+          <h5 className={`text-white`}>{user.name}</h5>
           <img src={`${icon ? angleDown : angleUp}`} className='cursor-pointer' onClick={() => {
             dispatch({ type: "icon" });
             dispatch({ type: "modal" });
@@ -44,7 +44,7 @@ const UserProfile = ({ user, onToggleBorrowFriend, onToggleBorrowBank, onToggleD
 
         </li>
 
-          <img src={user.delete} className="absolute top-3 w-4 bg-gray-950 rounded-full right-5 z-50 " onClick={() => onDelete({type: "deleteFriends", payload: user})} />
+          <img src={close} className="absolute top-3 w-4 bg-gray-950 rounded-full right-5 z-50 " onClick={() => onDelete({type: "deleteFriends", payload: user})} />
         
         {modal &&
           <div className='grid grid-cols-1 search'>
@@ -67,13 +67,13 @@ const UserProfile = ({ user, onToggleBorrowFriend, onToggleBorrowBank, onToggleD
   )
 }
 
-const User = ({ onToggleBorrowFriend, onToggleBorrowBank, onToggleDeposit, onToggleAddFriends, friends, onDelete }) => {
+const User = ({ onToggleBorrowFriend, onToggleBorrowBank, onToggleDeposit, onToggleAddFriends, friends, onDelete, selectBorrow, borrowFriend }) => {
 
   if (window.innerWidth <= 640) {
     return (
 
       <>
-        {
+        
           <div>
             <Cover
               color='black'
@@ -95,7 +95,7 @@ const User = ({ onToggleBorrowFriend, onToggleBorrowBank, onToggleDeposit, onTog
                 <img src={user} alt='user' className='col-start-7 object-contain' />
               </div>
               {friends.map((user) => (
-                <UserProfile user={user} key={user.id} onToggleBorrowBank={onToggleBorrowBank} onToggleDeposit={onToggleDeposit} onToggleAddFriends={onToggleAddFriends} onToggleBorrowFriend={onToggleBorrowFriend} onDelete={onDelete} />
+                <UserProfile user={user} key={user.id} onToggleBorrowBank={onToggleBorrowBank} onToggleDeposit={onToggleDeposit} onToggleAddFriends={onToggleAddFriends} onToggleBorrowFriend={onToggleBorrowFriend} onDelete={onDelete} selectBorrow={selectBorrow} borrowFriend={borrowFriend} />
               ))}
 
               <div className='grid justify-end px-3'>
@@ -105,13 +105,12 @@ const User = ({ onToggleBorrowFriend, onToggleBorrowBank, onToggleDeposit, onTog
               </div>
             </div>
           </div>
-        }    </>
+            </>
 
     )
   } else {
 
     return (
-
       <div>
         <Cover
           color='black'
@@ -133,7 +132,7 @@ const User = ({ onToggleBorrowFriend, onToggleBorrowBank, onToggleDeposit, onTog
             <img src={user} alt='user' className='col-start-7 object-contain' />
           </div>
           {friends.map((user) => (
-            <UserProfile user={user} key={user.id} onToggleBorrowFriend={onToggleBorrowFriend} onToggleBorrowBank={onToggleBorrowBank} onToggleDeposit={onToggleDeposit} onToggleAddFriends={onToggleAddFriends} onDelete={onDelete} />
+            <UserProfile user={user} key={user.id} onToggleBorrowFriend={onToggleBorrowFriend} onToggleBorrowBank={onToggleBorrowBank} onToggleDeposit={onToggleDeposit} onToggleAddFriends={onToggleAddFriends} onDelete={onDelete}  selectBorrow={selectBorrow} borrowFriend={borrowFriend} />
           ))}
 
           <div className='grid justify-end px-3'>

@@ -6,6 +6,7 @@ import Cover from "./Cover";
 import BorrowBank from "./BorrowBank";
 import ButtonScope from "./ButtonScope";
 import Navbar from "./Navbar";
+import SearchFriends from "./SearchFriends";
 
 
 export {
@@ -17,4 +18,5 @@ export {
     BorrowBank,
     ButtonScope,
     Navbar,
+    SearchFriends
 }

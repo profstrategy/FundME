@@ -51,7 +51,7 @@ const BorrowForm = ({ borrowFriend, lender, amount, dispatchFriendAmt, handleIse
 
               <form className={`w-full grid gap-3 bg-white py-3 h-auto`}>
 
-                <input type='text' placeholder='name of lender' value={lender} className='w-5/6 m-auto grid py-2 bg- shadow-md shadow-slate-200 border-slate-950 border-2 rounded' onClick={() => handleIselectedToBorrow()}  />
+                <input type='text' placeholder='name of lender' value={lender} className='w-5/6 m-auto grid py-2 bg- shadow-md shadow-slate-200 border-slate-950 border-2 rounded'  onChange={handleIselectedToBorrow(lender)} />
 
                 <input type='text' value={amount} className='w-5/6 m-auto grid shadow-md shadow-slate-200 border-slate-950 border-2 rounded py-2 mb-3' placeholder='amount to borrow' onChange={(e) => dispatchFriendAmt({ type: "amount", payload: Number(e.target.value)})} />
               </form>

@@ -1,5 +1,5 @@
 import { useReducer, useEffect } from 'react';
-import { User, AddUser, BorrowForm, BorrowBank, Deposit, Navbar } from './Components'
+import { User, AddUser, BorrowForm, BorrowBank, Deposit, Navbar, SearchFriends } from './Components'
 import './App.css'
 import { initialUsers } from './Contents/content'
 
@@ -50,59 +50,92 @@ function App() {
           addFriends: false
         }
 
-        case "deleteFriends":
-          return{
-            ...state,
-            friends: state.friends.filter((friend) => friend.id !== action.payload.id)
-          }
+      case "deleteFriends":
+        return {
+          ...state,
+          friends: state.friends.filter((friend) => friend.id !== action.payload.id)
+        }
 
-          case "lender":
+      case "lender":
+        return {
+          ...state,
+          lender: action.payload
+        }
+
+      case "amount":
+        return {
+          ...state,
+          amount: action.payload
+        }
+
+        
+        case "selectBorrow":
+          const updatedFriends = state.friends.map((update) => ({
+            ...update,
+            isSelected: update.name === action.payload
+          }));
+        
+          return {
+            ...state,
+            friends: updatedFriends,
+          };
+
+          case "selectBank":
+            const UpdateBorrowBank = state.friends.map((update) => ({
+              ...update,
+              isSelected: update.name === action.payload
+            }))
+
             return {
               ...state,
-              lender: action.payload
+              friends: UpdateBorrowBank
             }
-
-            case "amount":
-              return {
-                ...state,
-                amount: action.payload
-              }
-
-              case "selectBorrow":
-                return {
-                  ...state,
-                  friends: state.friends.includes(action.payload)
-                    ? state.friends
-                    : [...state.friends, action.payload],
-                };
-              
+        
 
       default:
         return state
     }
   }
 
-  const initialStates = { borrowFriend: false, borrowBank: false, deposit: false, addFriends: false, friends: initialUsers, lender: '', amount: ''}
+  const initialStates = { borrowFriend: false, borrowBank: false, deposit: false, addFriends: false, friends: initialUsers, lender: '', amount: '', selectBorrow: null, selectBank: null }
   const [state, dispatch] = useReducer(reducer, initialStates)
-  
 
-  const { borrowFriend, borrowBank, deposit, addFriends, friends, lender, amount } = state;
 
-  const handleIselectedToBorrow = () => {
+  const { borrowFriend, borrowBank, deposit, addFriends, friends, amount, selectBorrow, selectBank } = state;
+
+  const handleIselectedToBorrow = (e) => {
+    const lender = e.target.value;
+
+    const compare = borrowFriend.name === lender
+    dispatch({ type: "lender", payload: lender });
     
+    if(compare) {
+      dispatch({ type: "selectBorrow", payload: lender });
+    }
+      
+ 
+  };
 
-    const isToBorrow = borrowFriend.name === lender
-    dispatch({type: "selectBorrow", payload: isToBorrow})
+  // const handleISelectedAmtToBorrow = (e) => {
+  //   const lender = Number(e.target.value);
 
-    console.log('done')
-  }
+  //   const compare = borrowFriend.name === lender
+  //   dispatch({ type: "lender", payload: lender });
+    
+  //   if(compare) {
+  //     dispatch({ type: "selectBorrow", payload: lender });
+  //   }
+      
+ 
+  // }
 
-  useEffect(() => {
-    handleIselectedToBorrow()
 
-    window.addEventListener('change', handleIselectedToBorrow)
-    return () => {window.removeEventListener('change', handleIselectedToBorrow)}
-  },[ handleIselectedToBorrow, borrowFriend, lender, dispatch ])
+  // useEffect(() => {
+  //   handleIselectedToBorrow()
+
+  //   window.addEventListener('change', handleIselectedToBorrow)
+  //   return () => {window.removeEventListener('change', handleIselectedToBorrow)}
+  // },[ handleIselectedToBorrow, borrowFriend, lender ])
 
   // const handleDeleteFriends = (id) => {
   //   dispatch(())
@@ -128,6 +161,9 @@ function App() {
   return (
     <div className=' bg-black'>
       <Navbar />
+      <SearchFriends
+      placeholder={'Search from your friend list'}
+       />
       <div className={`min-h-screen grid grid-cols-1 items-center justify-center`}>
 
         <div
@@ -136,24 +172,24 @@ function App() {
 
           <User onToggleBorrowFriend={(friend) => dispatch({ type: 'toggleBorrowFriend', payload: friend })}
 
-             onToggleDeposit={(friend) => dispatch({ type: "toggleDeposit", payload: friend })}
-             
-             onToggleAddFriends={(friend) => dispatch({ type: "toggleAddFriends", payload: friend })} friends={friends}
-             
-             onToggleBorrowBank={(friend) => dispatch({ type: "toggleBorrowBank", payload: friend })}
+            onToggleDeposit={(friend) => dispatch({ type: "toggleDeposit", payload: friend })}
 
-             onDelete={dispatch}
-              />
+            onToggleAddFriends={(friend) => dispatch({ type: "toggleAddFriends", payload: friend })} friends={friends}
 
-          {borrowFriend && <BorrowForm borrowFriend={borrowFriend} amount={amount}  dispatchFriendAmt={dispatch} handleIselectedToBorrow={handleIselectedToBorrow} />}
+            onToggleBorrowBank={(friend) => dispatch({ type: "toggleBorrowBank", payload: friend })}
+
+            onDelete={dispatch} selectBorrow={selectBorrow} borrowFriend={borrowFriend} 
+          />
+
+          {borrowFriend && <BorrowForm borrowFriend={borrowFriend} amount={amount} dispatchFriendAmt={dispatch} handleIselectedToBorrow={() => handleIselectedToBorrow} />}
           {borrowBank && <BorrowBank borrowBank={borrowBank} />}
-          {deposit && <Deposit deposit={deposit}/>}
+          {deposit && <Deposit deposit={deposit} />}
 
         </div>
       </div>
 
       <div
-        className={`w-4/6 m-auto grid grid-cols-1 md:w-3/6 lg:w-2/6 max-sm:left-4 max-sm:relative mt-4`}
+        className={`w-4/6 m-auto grid grid-cols-1 md:w-3/6 lg:w-2/6 max-sm:left-4 max-sm:relative lg:mt-[-1rem] mt-5`}
       >
         {addFriends && <AddUser onAddUsers={(friend) => dispatch({ type: "addFriends", payload: friend })} />}
       </div>
