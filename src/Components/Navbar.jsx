@@ -18,7 +18,7 @@ const Navbar = () => {
                     <ul className='text-white text-[.8rem] list-none flex flex-col gap-7'>
                         <li className=' hover:bg-gray-700 py-2 rounded-full cursor-pointer'>
                             <img src={usernav} className='m-auto' />
-                            <em className='grid justify-center'>Friends</em>
+                            <em className='grid justify-center' >Friends</em>
                         </li>
                         <li className=' hover:bg-gray-700 py-2 rounded-full cursor-pointer'>
                             <img src={briefcase} className='m-auto' />

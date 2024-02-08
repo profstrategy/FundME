@@ -9,6 +9,7 @@ import usernav from './usernav.svg'
 import menu from './menu.svg'
 import close from './close.svg'
 import search from './search.svg'
+import fundCard from './fundCard.png'
 export {
     angleDown,
     user,
@@ -20,5 +21,6 @@ export {
     usernav,
     menu,
     close,
-    search
+    search,
+    fundCard
 }

@@ -1,0 +1,54 @@
+{
+    "friends": [
+        {
+            "image": "https://i.pravatar.cc/48?=${crypto.randomUUID()}",
+            "balance": 300,
+            "name": "John"
+        },
+        {
+            "image": "https://i.pravatar.cc/48?=${crypto.randomUUID()}",
+            "balance": 3000,
+            "name": "Adeoye"
+        },
+        {
+            "image": "https://i.pravatar.cc/48?=${crypto.randomUUID()}",
+            "balance": 500,
+            "name": "Isah"
+        },
+        {
+            "image": "https://i.pravatar.cc/48?=${crypto.randomUUID()}",
+            "balance": 4000,
+            "name": "Mary"
+        },
+        {
+            "image": "https://i.pravatar.cc/48?=${crypto.randomUUID()}",
+            "balance": 3000,
+            "name": "Akin"
+        },
+        {
+            "image": "https://i.pravatar.cc/48?=${crypto.randomUUID()}",
+            "balance": 600,
+            "name": "Lola"
+        },
+        {
+            "image": "https://i.pravatar.cc/48?=${crypto.randomUUID()}",
+            "balance": 300,
+            "name": "Baasi"
+        },
+        {
+            "image": "https://i.pravatar.cc/48?=${crypto.randomUUID()}",
+            "balance": 900,
+            "name": "Neymar"
+        },
+        {
+            "image": "https://i.pravatar.cc/48?=${crypto.randomUUID()}",
+            "balance": 30000,
+            "name": "Messi"
+        },
+        {
+            "image": "https://i.pravatar.cc/48?=${crypto.randomUUID()}",
+            "balance": 300,
+            "name": "Ronaldo"
+        }
+    ]
+}

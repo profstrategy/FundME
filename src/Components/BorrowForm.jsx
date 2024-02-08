@@ -1,33 +1,22 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useReducer } from 'react';
 
 import { Cover, ButtonScope } from '../Components';
 import { minus, plus } from '../assets';
 
-const BorrowForm = ({ borrowFriend, lender, amount, dispatchFriendAmt, handleIselectedToBorrow }) => {
-  // const [showIcon, setShowIcon] = useState(plus)
+const BorrowForm = ({ borrowFriend, lender, amount, dispatchFriendAmt, handleIselectedToBorrow, showIconFriends, onshowIcon }) => {
 
+  // const reducer = (state, action) => {
+  //     switch (action.type) {
+        
 
-  // const handleShowIcon = () => {
-  //   setShowIcon(!showIcon)
-    
+  //         default:
+  //           return state
+  //     }
   // }
 
-  const reducer = (state, action) => {
-      switch (action.type) {
-        case "showIcon":
-          return {
-            ...state,
-            showIcon: !state.showIcon
-          }
-
-          default:
-            return state
-      }
-  }
-
-  const borrowState = { showIcon: plus }
-  const [ state, dispatch] = useReducer(reducer, borrowState)
-  const { showIcon } = state
+  // const borrowState = { showIcon: plus }
+  // const [ state, dispatch] = useReducer(reducer, borrowState)
+  // const { showIcon } = state
 
   return (
     <>
@@ -42,7 +31,7 @@ const BorrowForm = ({ borrowFriend, lender, amount, dispatchFriendAmt, handleIse
           >
             <div className='flex items-center px-1 h-10'>
               <div className='bg-black flex rounded-full justify-center h-5 cursor-pointer'>
-                <img src={`${showIcon ? minus : plus}`} className='w-5 visible sm:hidden' onClick={() => dispatch({type: "showIcon"})} />
+                <img src={`${showIconFriends ? minus : plus}`} className='w-5 visible sm:hidden' onClick={() => onshowIcon({type: "showIcon"})} />
               </div>
               <h6 className='text-black m-auto'>you want to borrow from {borrowFriend.name} </h6>
             </div>

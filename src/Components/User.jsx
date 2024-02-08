@@ -1,7 +1,7 @@
-import { useReducer } from 'react';
+import { useReducer, useContext } from 'react';
 
 import { user, angleDown, angleUp, close } from '../assets';
-import { ButtonScope, Cover } from '../Components';
+import { ButtonScope } from '../Components';
 
 
 function reducer(state, action) {
@@ -18,7 +18,7 @@ function reducer(state, action) {
 
 const initialState = { modal: false, icon: false }
 
-const UserProfile = ({ user, onToggleBorrowFriend, onToggleBorrowBank, onToggleDeposit, onDelete }) => {
+const UserProfile = ({ user, onToggleBorrowFriend, onToggleBorrowBank, UserContext }) => {
   const [state, dispatch] = useReducer(reducer, initialState)
   const { modal, icon } = state
 
@@ -29,11 +29,13 @@ const UserProfile = ({ user, onToggleBorrowFriend, onToggleBorrowBank, onToggleD
   //   window.addEventListener('click', dispatch)
   // }, [dispatch])
 
+   const { onDelete } = useContext(UserContext)
+  
 
   return (
     <div className='py-3 px-7 relative'>
       <>
-        <li className={`${user.isSelected ? 'bg-green-500' : ''} } list-none flex text-initial justify-between px-2 items-center bg-gray-950 rounded-lg mt-2`}>
+        <li className={`${user.isSelected || user.juSelected || user.nameSelected ? 'bg-green-500' : ''} } list-none flex text-initial justify-between px-2 items-center bg-gray-950 rounded-lg mt-2`}>
 
           <img className='rounded-full' src={user.image} />
           <h5 className={`text-white`}>{user.name}</h5>
@@ -67,72 +69,18 @@ const UserProfile = ({ user, onToggleBorrowFriend, onToggleBorrowBank, onToggleD
   )
 }
 
-const User = ({ onToggleBorrowFriend, onToggleBorrowBank, onToggleDeposit, onToggleAddFriends, friends, onDelete, selectBorrow, borrowFriend }) => {
-
-  if (window.innerWidth <= 640) {
-    return (
-
-      <>
-        
-          <div>
-            <Cover
-              color='black'
-              bgColor='white'
-
-              paddingX='3'
-            >
-              <div className='flex justify-between items-center px-1'>
-                <h6 className='text-blue-300'>FundME</h6>
-                <div>
-                  <p className='text-sm'>X Bank account</p>
-                  <em> X balance: </em>
-                </div>
-              </div>
-            </Cover>
-            <div className={`bg-white rounded-lg h-auto w-full shadow-md shadow-zinc-300 pb-3`}>
-              <div className='flex justify-between items-center px-2 border-b-2 h-10'>
-                <h1 className='col-end-2'>Users</h1>
-                <img src={user} alt='user' className='col-start-7 object-contain' />
-              </div>
-              {friends.map((user) => (
-                <UserProfile user={user} key={user.id} onToggleBorrowBank={onToggleBorrowBank} onToggleDeposit={onToggleDeposit} onToggleAddFriends={onToggleAddFriends} onToggleBorrowFriend={onToggleBorrowFriend} onDelete={onDelete} selectBorrow={selectBorrow} borrowFriend={borrowFriend} />
-              ))}
-
-              <div className='grid justify-end px-3'>
-                <ButtonScope
-                  onClick={onToggleAddFriends}
-                >ADD USERS</ButtonScope>
-              </div>
-            </div>
-          </div>
-            </>
-
-    )
-  } else {
+const User = ({ onToggleBorrowFriend, onToggleBorrowBank, onToggleAddFriends, friends, UserContext }) => {
 
     return (
-      <div>
-        <Cover
-          color='black'
-          bgColor='white'
-
-          paddingX='3'
-        >
-          <div className='flex justify-between items-center px-1'>
-            <h6 className='text-blue-300'>FundME</h6>
-            <div>
-              <p className='text-sm'>X Bank account</p>
-              <em> X balance: </em>
-            </div>
-          </div>
-        </Cover>
+      <div className=' m-auto w-4/6 md:w-2/6 lg:w-2/6'>
+  
         <div className={`bg-white rounded-lg h-auto w-full shadow-md shadow-zinc-300 pb-3`}>
           <div className='flex justify-between items-center px-2 border-b-2 h-10'>
             <h1 className='col-end-2'>Users</h1>
-            <img src={user} alt='user' className='col-start-7 object-contain' />
+            <img src={user} alt='user' className='col-start-7 object-contain w-3' />
           </div>
           {friends.map((user) => (
-            <UserProfile user={user} key={user.id} onToggleBorrowFriend={onToggleBorrowFriend} onToggleBorrowBank={onToggleBorrowBank} onToggleDeposit={onToggleDeposit} onToggleAddFriends={onToggleAddFriends} onDelete={onDelete}  selectBorrow={selectBorrow} borrowFriend={borrowFriend} />
+            <UserProfile user={user} key={user.id} onToggleBorrowFriend={onToggleBorrowFriend} onToggleBorrowBank={onToggleBorrowBank} onToggleAddFriends={onToggleAddFriends} UserContext={UserContext} />
           ))}
 
           <div className='grid justify-end px-3'>
@@ -144,7 +92,6 @@ const User = ({ onToggleBorrowFriend, onToggleBorrowBank, onToggleDeposit, onTog
       </div>
 
     )
-  }
 
 }
 

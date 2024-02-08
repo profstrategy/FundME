@@ -1,5 +1,5 @@
-import { useReducer, useEffect } from 'react';
-import { User, AddUser, BorrowForm, BorrowBank, Deposit, Navbar, SearchFriends } from './Components'
+import { useReducer, useEffect, createContext } from 'react';
+import { User, AddUser, BorrowForm, BorrowBank, Deposit, Navbar, SearchFriends, Cover, GetFriends, ButtonScope } from './Components'
 import './App.css'
 import { initialUsers } from './Contents/content'
 
@@ -68,67 +68,109 @@ function App() {
           amount: action.payload
         }
 
-        
-        case "selectBorrow":
-          const updatedFriends = state.friends.map((update) => ({
-            ...update,
-            isSelected: update.name === action.payload
-          }));
-        
-          return {
-            ...state,
-            friends: updatedFriends,
-          };
+      case "deposit":
+        return {
+          ...state,
+          deposit: action.payload
+        }
 
-          case "selectBank":
-            const UpdateBorrowBank = state.friends.map((update) => ({
-              ...update,
-              isSelected: update.name === action.payload
-            }))
+      case "depositFriend":
+        return {
+          ...state,
+          depositFriend: action.payload
+        }
 
-            return {
-              ...state,
-              friends: UpdateBorrowBank
-            }
-        
+      case "toggleFriendList":
+        return {
+          ...state,
+          toggleFriendList: !state.toggleFriendList ? action.payload : false,
+        }
+
+
+      case "selectBorrow":
+        const updatedFriends = state.friends.map((update) => ({
+          ...update,
+          isSelected: update.name === action.payload
+        }));
+
+        return {
+          ...state,
+          friends: updatedFriends,
+        };
+
+      case "getFriendList":
+
+        return {
+          ...state,
+          searchList: action.payload
+        };
+
+      case "searchFriendList":
+
+        const searchFriendList = state.friends.map((update) => ({
+          ...update,
+          isSelected: update.name === action.payload
+        }))
+
+        return {
+          ...state,
+          friends: searchFriendList
+        }
+
+      case "showIcon":
+        return {
+          ...state,
+          showIcon: !state.showIcon,
+          toggleFriendList: true
+
+        }
+
+      case "showFriendModal":
+        const showFriendModal = state.friends.map((update) => ({
+          ...update,
+          nameSelected: update.name === action.payload
+        }))
+        return {
+          ...state,
+          showFriendModal: showFriendModal
+        }
+
+
 
       default:
         return state
     }
   }
 
-  const initialStates = { borrowFriend: false, borrowBank: false, deposit: false, addFriends: false, friends: initialUsers, lender: '', amount: '', selectBorrow: null, selectBank: null }
+  const initialStates = { borrowFriend: false, borrowBank: false, deposit: false, addFriends: false, friends: initialUsers, selectBorrow: null, searchList: '', searchFriendList: '', showIconFriends: false }
   const [state, dispatch] = useReducer(reducer, initialStates)
 
 
-  const { borrowFriend, borrowBank, deposit, addFriends, friends, amount, selectBorrow, selectBank } = state;
+  const { borrowFriend, borrowBank, deposit, addFriends, friends, depositFriend, searchFromlist, showIconFriends, } = state;
 
   const handleIselectedToBorrow = (e) => {
     const lender = e.target.value;
 
     const compare = borrowFriend.name === lender
     dispatch({ type: "lender", payload: lender });
-    
-    if(compare) {
+
+    if (compare) {
       dispatch({ type: "selectBorrow", payload: lender });
     }
-      
- 
   };
 
-  // const handleISelectedAmtToBorrow = (e) => {
-  //   const lender = Number(e.target.value);
+  // const handleSelectedAmtToDeposit = (e) => {
+  //   const depositFriend = Number(e.target.value);
 
-  //   const compare = borrowFriend.name === lender
-  //   dispatch({ type: "lender", payload: lender });
-    
-  //   if(compare) {
-  //     dispatch({ type: "selectBorrow", payload: lender });
-  //   }
-      
- 
+  //   dispatch({ type: "depositFriend", payload: depositFriend });
+  //   dispatch({ type: "selectDeposit", payload: depositFriend })
   // }
 
+  function handleSearchList(e) {
+    const searchName = e.target.value
+    dispatch({ type: "getFriendList", payload: searchName })
+    dispatch({ type: "searchFriendList", payload: searchName })
+  }
 
   // useEffect(() => {
   //   handleIselectedToBorrow()
@@ -158,18 +200,38 @@ function App() {
   //   setSelectBorrowFriend('')
   //   setOpenAddUser('')
   // };
+
+  const UserContext = createContext()
   return (
-    <div className=' bg-black'>
+    <div className=' grid'>
+      
       <Navbar />
-      <SearchFriends
-      placeholder={'Search from your friend list'}
-       />
-      <div className={`min-h-screen grid grid-cols-1 items-center justify-center`}>
+      <div className='grid grid-rows-1 gap-20' >
 
-        <div
-          className={` w-4/6 md:w-5/6 lg:w-4/6 relative grid justify-center m-auto gap-3 max-sm:left-4  ${borrowFriend || borrowBank || deposit ? 'grid grid-cols-2 lg:w-4/6 md:w-4/6 max-sm:grid-cols-1' : ''}`}
+      <Cover
+          color='black'
+          bgColor='white'
+          width="3/6"
+          paddingX='3'
         >
+          <div className='flex justify-between items-center px-1'>
+            <h6 className='text-blue-300'>FundME</h6>
+            <div>
+              <p className='text-sm'>X Bank account</p>
+              <em> X balance: </em>
+            </div>
+          </div>
+          
+        </Cover>
+        <SearchFriends
+          value={searchFromlist}
+          onChange={handleSearchList}
+          placeholder={'Search friends from your friend list'}
+        />
 
+        <UserContext.Provider value={{
+          onDelete: dispatch,
+        }}>
           <User onToggleBorrowFriend={(friend) => dispatch({ type: 'toggleBorrowFriend', payload: friend })}
 
             onToggleDeposit={(friend) => dispatch({ type: "toggleDeposit", payload: friend })}
@@ -178,22 +240,22 @@ function App() {
 
             onToggleBorrowBank={(friend) => dispatch({ type: "toggleBorrowBank", payload: friend })}
 
-            onDelete={dispatch} selectBorrow={selectBorrow} borrowFriend={borrowFriend} 
+            UserContext={UserContext}
           />
+        </UserContext.Provider>
 
-          {borrowFriend && <BorrowForm borrowFriend={borrowFriend} amount={amount} dispatchFriendAmt={dispatch} handleIselectedToBorrow={() => handleIselectedToBorrow} />}
-          {borrowBank && <BorrowBank borrowBank={borrowBank} />}
-          {deposit && <Deposit deposit={deposit} />}
-
-        </div>
+        {borrowFriend && <BorrowForm borrowFriend={borrowFriend} dispatchFriendAmt={dispatch} handleIselectedToBorrow={() => handleIselectedToBorrow} showIconFriends={showIconFriends} onshowIcon={dispatch} />}
+        {borrowBank && <BorrowBank borrowBank={borrowBank} />}
+        {deposit && <Deposit depositFriend={depositFriend} deposit={deposit} handleSelectedAmtToDeposit={() => handleSelectedAmtToDeposit} />}
       </div>
 
-      <div
-        className={`w-4/6 m-auto grid grid-cols-1 md:w-3/6 lg:w-2/6 max-sm:left-4 max-sm:relative lg:mt-[-1rem] mt-5`}
-      >
+      <div className='h-full bg-neutral-900 fixed right-0 lg:w-80 w-full md:w-40 flex flex-col'>
+        <ButtonScope />
+      <GetFriends />
+
         {addFriends && <AddUser onAddUsers={(friend) => dispatch({ type: "addFriends", payload: friend })} />}
       </div>
-    </div>
+    </div >
   );
 }
 

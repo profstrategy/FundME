@@ -35,15 +35,15 @@ const AddUser = ({ onAddUsers }) => {
   return (
     <>
       {
-        < div className={`bg-white rounded-md py-3 mb-3 lg:w-5/6 md:w-5/6 w-full m-auto`} >
+        < div className={`rounded-md bg-[#0D0D0D] py-3 mb-3 lg:w-5/6 md:w-5/6 w-full m-auto border-[1px] border-[#6D7D93]`} >
 
-          <form className={`w-full grid gap-3 bg-white py-3 h-auto `} onSubmit={handleAddUser}>
-            <h1 className='text-xl mx-8'>ADD YOUR FRIENDS </h1>
-            <input type='text' value={name} onChange={(e) => setName(e.target.value)} placeholder='name of user' className='w-5/6 m-auto grid py-2 bg- shadow-md shadow-slate-200 border-slate-950 border-2 rounded' />
+          <form className={`w-full grid gap-3 bg-bg-[#0D0D0D] py-3 h-auto `} onSubmit={handleAddUser}>
+            <h1 className='text-xl text-[#FFFFFF] mx-8'>ADD YOUR FRIENDS </h1>
+            <input type='text' value={name} onChange={(e) => setName(e.target.value)} placeholder='name of user' className='w-5/6 m-auto grid py-2 bg-[#0D0D0D] shadow-md shadow-[#0D0D0D] border-[#1C1D24] border-2 outline-none rounded text-[#FFFFFF]' />
 
-            <input type='text' value={balance} className='w-5/6 m-auto grid shadow-md shadow-slate-200 border-slate-950 border-2 rounded py-2 mb-3' placeholder='amount to deposit' onChange={(e) => setBalance(Number(e.target.value))} />
+            <input type='text' value={balance} className='w-5/6 m-auto grid py-2 bg-[#0D0D0D] shadow-md shadow-[#0D0D0D] border-[#1C1D24] border-2 outline-none rounded text-[#FFFFFF]'  placeholder='amount to deposit' onChange={(e) => setBalance(Number(e.target.value))} />
             <label className='px-9 text-blue-500'>Not required</label>
-            <input type='text' value={image} className=' w-5/6 m-auto grid shadow-md shadow-slate-200 border-slate-950 border-2 rounded py-2 mb-3' placeholder='https://i.pravatar' onChange={(e) => setImage(e.target.value)} disabled/>
+            <input type='text' value={image} className='w-5/6 m-auto grid py-2 bg-[#0D0D0D] shadow-md shadow-[#0D0D0D] border-[#1C1D24] border-2 outline-none rounded text-[#FFFFFF]'  placeholder='https://i.pravatar' onChange={(e) => setImage(e.target.value)} disabled/>
 
           </form>
 
