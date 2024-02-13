@@ -8,6 +8,7 @@ import ButtonScope from "./ButtonScope";
 import Navbar from "./Navbar";
 import SearchFriends from "./SearchFriends";
 import GetFriends from "./GetFriends";
+import Statistics from "./Statistics";
 
 
 export {
@@ -20,5 +21,6 @@ export {
     ButtonScope,
     Navbar,
     SearchFriends,
-    GetFriends
+    GetFriends,
+    Statistics,
 }

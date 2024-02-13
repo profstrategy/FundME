@@ -1,49 +1,34 @@
-import React, { useReducer } from 'react';
+import React from 'react';
 
-import { Cover, ButtonScope } from '../Components';
+import { ButtonScope } from '../Components';
 import { minus, plus } from '../assets';
+import { UseFundMe } from '../Context/FundMeContext';
 
-const BorrowForm = ({ borrowFriend, lender, amount, dispatchFriendAmt, handleIselectedToBorrow, showIconFriends, onshowIcon }) => {
+const BorrowForm = () => {
 
-  // const reducer = (state, action) => {
-  //     switch (action.type) {
-        
-
-  //         default:
-  //           return state
-  //     }
-  // }
-
-  // const borrowState = { showIcon: plus }
-  // const [ state, dispatch] = useReducer(reducer, borrowState)
-  // const { showIcon } = state
-
+  const { borrowFriend, lender, amount, handleIselectedToBorrow, dispatchFriendAmt, onshowIcon, showIconFriends } = UseFundMe()
+  
   return (
     <>
-      {
+      {borrowFriend &&
         <div className={`mt-5 md:mt-0`}>
-          <Cover
-            color='black'
-            bgColor='white'
-            height='10'
-            paddingX='3'
-            marginTop='3'
-          >
-            <div className='flex items-center px-1 h-10'>
-              <div className='bg-black flex rounded-full justify-center h-5 cursor-pointer'>
-                <img src={`${showIconFriends ? minus : plus}`} className='w-5 visible sm:hidden' onClick={() => onshowIcon({type: "showIcon"})} />
-              </div>
-              <h6 className='text-black m-auto'>you want to borrow from {borrowFriend.name} </h6>
-            </div>
-          </Cover>
-          <div className={`bg-white rounded-lg h-auto w-full shadow-md shadow-zinc-300 pb-3 pt-3`}>
+          <div className={`rounded-md bg-[#0D0D0D] py-3 border-[1px] border-[#6D7D93] m-auto tablet:w-4/6 iphonesm:w-5/6 iphonesm:m-auto h-auto`}>
 
-              <form className={`w-full grid gap-3 bg-white py-3 h-auto`}>
+            <form className={`w-full grid gap-3 bg-[#0D0D0D] py-3 h-auto `}>
+              <h6 className='text-[#ffffff] text-md text-center m-auto px-2'>you want to borrow from {borrowFriend.name} </h6>
 
-                <input type='text' placeholder='name of lender' value={lender} className='w-5/6 m-auto grid py-2 bg- shadow-md shadow-slate-200 border-slate-950 border-2 rounded'  onChange={handleIselectedToBorrow(lender)} />
+              <img src={`${showIconFriends ? minus : plus}`} className='w-5 visible sm:hidden bg-[#6D7D93] rounded-full relative bottom-12 left-3' onClick={() => onshowIcon({ type: "showIcon" })} />
 
-                <input type='text' value={amount} className='w-5/6 m-auto grid shadow-md shadow-slate-200 border-slate-950 border-2 rounded py-2 mb-3' placeholder='amount to borrow' onChange={(e) => dispatchFriendAmt({ type: "amount", payload: Number(e.target.value)})} />
-              </form>
+              <input
+                type='text'
+                placeholder='name of lender'
+                value={lender}
+                className='w-5/6 m-auto grid py-2 bg-[#0D0D0D] shadow-md shadow-[#0D0D0D] border-[#1C1D24] border-2 outline-none rounded text-[#FFFFFF]'
+                onChange={(e) => handleIselectedToBorrow(e.target.value)}
+              />
+
+              <input type='text' value={amount} className='w-5/6 m-auto grid py-2 bg-[#0D0D0D] shadow-md shadow-[#0D0D0D] border-[#1C1D24] border-2 outline-none rounded text-[#FFFFFF]' placeholder='amount to borrow' onChange={(e) => dispatchFriendAmt({ type: "amount", payload: Number(e.target.value) })} />
+            </form>
 
             <div className='grid justify-end px-10'>
               <ButtonScope

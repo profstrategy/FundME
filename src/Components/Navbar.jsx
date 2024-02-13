@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 
-import { usernav, briefcase, dropbox, close, menu } from '../assets';
+import { usernav, briefcase, dropbox, close, menu, search } from '../assets';
 
 const Navbar = () => {
     const [isOpen, setOpen] = useState(false)
@@ -14,19 +14,26 @@ const Navbar = () => {
         <>
             
                { isOpen &&
-                <div className='min-h-screen bg-stone-950 shadow-zinc-700 shadow-lg fixed left-0 w-12 grid grid-rows-1 py-10'>
+                <div className='min-h-screen bg-stone-950 shadow-zinc-700 shadow-lg fixed left-0 w-12 grid grid-rows-1 py-10 z-50'>
                     <ul className='text-white text-[.8rem] list-none flex flex-col gap-7'>
                         <li className=' hover:bg-gray-700 py-2 rounded-full cursor-pointer'>
                             <img src={usernav} className='m-auto' />
                             <em className='grid justify-center' >Friends</em>
                         </li>
+
                         <li className=' hover:bg-gray-700 py-2 rounded-full cursor-pointer'>
                             <img src={briefcase} className='m-auto' />
                             <em className='grid justify-center'>Bank</em>
                         </li>
+
                         <li className=' hover:bg-gray-700 py-2 rounded-full cursor-pointer'>
                             <img src={dropbox} className='m-auto' />
                             <em className='grid justify-center'>Deposit</em>
+                        </li>
+
+                        <li className=' hover:bg-gray-700 py-2 rounded-full cursor-pointer lg:hidden max-sm:visible'>
+                            <img src={search} className='m-auto' />
+                            <em className='grid justify-center'>Search</em>
                         </li>
                     </ul>
 

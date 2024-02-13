@@ -9,10 +9,10 @@ export default {
 
       screens: {
         "xs": "450px",
-        "iphonesm" : "320px",
-        "iphonemd" : "375px",
-        "iphonelg" : "414px" ,
-        // 'tablet': {'min': '1090px', 'max': '1220px'}
+        "iphonesm" : { "max":"639px"},
+        // "iphonemd" : "375px",
+        // "iphonelg" : "414px" ,
+        'tablet': {'min': '640px', 'max': '767px'}
       },
 
     },

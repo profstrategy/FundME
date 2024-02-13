@@ -1,7 +1,6 @@
 
 import { angleUp, close } from "../assets"
-
-export const initialUsers = [
+ export const initialUsers = [
     {
         id: 46332,
         name: "Abdulrahman",

@@ -4,6 +4,7 @@ body{
   margin: 0;
   background-color: #111111;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 /* 
 ${borrowFriend || borrowBank || deposit ? 'grid grid-cols-2 lg:w-4/6 md:w-4/6 max-sm:grid-cols-1' : ''} */
@@ -14,3 +15,41 @@ ${borrowFriend || borrowBank || deposit ? 'grid grid-cols-2 lg:w-4/6 md:w-4/6 ma
 
 /* user style */
 /* className={` w-4/6 md:w-5/6 lg:w-4/6 relative grid justify-center m-auto gap-3 max-sm:left-4`} */
+
+
+/* // useEffect(() => {
+  //   handleIselectedToBorrow()
+
+  //   window.addEventListener('change', handleIselectedToBorrow)
+  //   return () => {window.removeEventListener('change', handleIselectedToBorrow)}
+  // },[ handleIselectedToBorrow, borrowFriend, lender ])
+
+  // const handleDeleteFriends = (id) => {
+  //   dispatch(())
+  // }
+
+  // const handleShowBorrowBank = () => {
+
+  //   window.innerWidth <= 640 ? setShowBorrowBank((prevShowBorrowBank) => !prevShowBorrowBank) && setShowUser((prevShowUser) => !prevShowUser) : setShowBorrowBank((prevShowBorrowBank) => !prevShowBorrowBank)
+
+  //  setSelectBorrowFriend('')
+  //  setShowDeposit('')
+  //   setOpenAddUser('')
+  // };
+
+  // const handleShowDeposit = () => {
+
+  //   window.innerWidth <= 640 ? setShowDeposit((prevShowDeposit) => !prevShowDeposit) && setShowUser((prevShowUser) => !prevShowUser) : setShowDeposit((prevShowDeposit) => !prevShowDeposit)
+
+  //   setShowBorrowBank('')
+  //   setSelectBorrowFriend('')
+  //   setOpenAddUser('')
+  // }; */
+
+
+  /* // const handleSelectedAmtToDeposit = (e) => {
+    //   const depositFriend = Number(e.target.value);
+  
+    //   dispatch({ type: "depositFriend", payload: depositFriend });
+    //   dispatch({ type: "selectDeposit", payload: depositFriend })
+    // } */

@@ -10,6 +10,7 @@ import menu from './menu.svg'
 import close from './close.svg'
 import search from './search.svg'
 import fundCard from './fundCard.png'
+import usersm from './usersm.svg'
 export {
     angleDown,
     user,
@@ -22,5 +23,6 @@ export {
     menu,
     close,
     search,
-    fundCard
+    fundCard,
+    usersm
 }

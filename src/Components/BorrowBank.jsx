@@ -1,9 +1,11 @@
 import { useState } from 'react'
 
-import { Cover, ButtonScope } from '../Components';
+import { ButtonScope } from '../Components';
 import { minus, plus } from '../assets';
+import { UseFundMe } from '../Context/FundMeContext';
 
-const BorrowBank = ({  setShowUser, borrowBank }) => {
+const BorrowBank = () => {
+    const { borrowBank } = UseFundMe()
     const [showIcon, setShowIcon] = useState(plus)
 
     const handleShowIcon = () => {
@@ -12,26 +14,15 @@ const BorrowBank = ({  setShowUser, borrowBank }) => {
     }
     return (
         <>
-           
+            {borrowBank &&
                 <div className='mt-5 md:mt-0'>
-                    <Cover
-                        color='black'
-                        bgColor='white'
-                        height='10'
-                        paddingX='3'
-                        marginTop='3'
-                    >
-                        <div className='flex items-center px-1 h-10'>
-                            <div className='bg-black flex rounded-full justify-center h-5 cursor-pointer'>
-                                <img src={`${showIcon ? minus : plus}`} className='w-5 visible sm:hidden' onClick={handleShowIcon} />
-                            </div>
-                            <h6 className='text-black m-auto'>{borrowBank.name} want to borrow from FundME account</h6>
-                        </div>
-                    </Cover>
-                    <div className='bg-white col-span-1 rounded-lg h-auto w-full shadow-md shadow-zinc-300 pb-3 pt-3'>
-                        <form className={`w-full grid gap-3 bg-white py-3 h-auto`}>
+                    <div className='rounded-md bg-[#0D0D0D] py-3 w-full m-auto border-[1px] border-[#6D7D93] iphonesm:w-5/6 iphonesm:m-auto tablet:w-4/6'>
+                        <form className={`w-full grid gap-3 bg-[#0D0D0D] py-3 h-auto `}>
 
-                            <input type='text' className='w-5/6 m-auto grid shadow-md shadow-slate-200 border-slate-950 border-2 rounded py-2 mb-3' placeholder='amount to borrow' />
+                            <h6 className='text-[#ffffff] text-md text-wrap m-auto px-2 '>{borrowBank.name} want to borrow from FundME account</h6>
+
+                            <img src={`${showIcon ? plus : minus}`} className='w-5 visible sm:hidden bg-[#6D7D93] rounded-full relative bottom-14 left-3' onClick={handleShowIcon} />
+                            <input type='text' className='w-5/6 m-auto grid py-2 bg-[#0D0D0D] shadow-md shadow-[#0D0D0D] border-[#1C1D24] border-2 outline-none rounded text-[#FFFFFF]' placeholder='amount to borrow' />
                         </form>
 
 
@@ -41,7 +32,7 @@ const BorrowBank = ({  setShowUser, borrowBank }) => {
                             >Request</ButtonScope>
                         </div>
                     </div>
-                </div>
+                </div>}
         </>
     )
 }
