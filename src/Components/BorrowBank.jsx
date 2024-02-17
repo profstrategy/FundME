@@ -16,7 +16,7 @@ const BorrowBank = () => {
         <>
             {borrowBank &&
                 <div className='mt-5 md:mt-0'>
-                    <div className='rounded-md bg-[#0D0D0D] py-3 w-full m-auto border-[1px] border-[#6D7D93] iphonesm:w-5/6 iphonesm:m-auto tablet:w-4/6'>
+                    <div className='rounded-md bg-[#0D0D0D] py-3 w-full m-auto border-[1px] border-[#6D7D93] iphonesm:w-5/6 iphonesm:m-auto tablet:w-4/6 lg:relative lg:top-48 md:relative md:top-48'>
                         <form className={`w-full grid gap-3 bg-[#0D0D0D] py-3 h-auto `}>
 
                             <h6 className='text-[#ffffff] text-md text-wrap m-auto px-2 '>{borrowBank.name} want to borrow from FundME account</h6>

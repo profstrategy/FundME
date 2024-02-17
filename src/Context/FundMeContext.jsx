@@ -135,12 +135,6 @@ function FundMeProvider({ children }) {
                     showFriendModal: showFriendModal
                 }
 
-            case "icon":
-                return { ...state, icon: !state.icon }
-
-            case "modal":
-                return { ...state, modal: !state.modal }
-
             default:
                 return state
         }
@@ -192,8 +186,6 @@ function FundMeProvider({ children }) {
         searchFromlist,
         showIconFriends,
         deposit,
-        modal,
-        icon,
         dispatch,
         onToggleAddFriends,
         onToggleBorrowFriend,

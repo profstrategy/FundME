@@ -1,9 +1,15 @@
 import React from 'react'
+import classNames from 'classnames'
 
-const ButtonScope = ( {children, ml, onClick}) => {
+const ButtonScope = ( {children, onClick, styles}) => {
+  const className = classNames({
+    "bg-[#002190]": true,
+    "text-white": true,
+    "rounded-md": true,
+  })
   return (
     <div onClick={onClick}>
-      <button className={`bg-[#002190] text-white px-3 py-2 rounded-md ml-${ml} relative`}>{children}</button>
+      <button className={`${className} ${styles}`}>{children}</button>
     </div>
   )
 }

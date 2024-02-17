@@ -12,7 +12,7 @@ const BorrowForm = () => {
     <>
       {borrowFriend &&
         <div className={`mt-5 md:mt-0`}>
-          <div className={`rounded-md bg-[#0D0D0D] py-3 border-[1px] border-[#6D7D93] m-auto tablet:w-4/6 iphonesm:w-5/6 iphonesm:m-auto h-auto`}>
+          <div className={`rounded-md bg-[#0D0D0D] py-3 border-[1px] border-[#6D7D93] m-auto tablet:w-4/6 iphonesm:w-5/6 iphonesm:m-auto h-auto lg:relative lg:top-40 md:relative md:top-40`}>
 
             <form className={`w-full grid gap-3 bg-[#0D0D0D] py-3 h-auto `}>
               <h6 className='text-[#ffffff] text-md text-center m-auto px-2'>you want to borrow from {borrowFriend.name} </h6>
