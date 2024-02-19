@@ -11,6 +11,8 @@ import close from './close.svg'
 import search from './search.svg'
 import fundCard from './fundCard.png'
 import usersm from './usersm.svg'
+import arrowRight from './arrow-right.svg'
+import arrowLeft from './arrow-left.svg'
 export {
     angleDown,
     user,
@@ -24,5 +26,7 @@ export {
     close,
     search,
     fundCard,
-    usersm
+    usersm,
+    arrowLeft,
+    arrowRight
 }

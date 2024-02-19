@@ -10,13 +10,15 @@ import SearchFriendsScope from "./SearchFriendsScope";
 import GetFriends from "./GetFriends";
 import Statistics from "./Statistics";
 import SearchFundMeUsers from "./SearchFundMeUsers";
-import Fundme from './Fundme';
 import CheckProfile from "./CheckProfile";
 import AppLayOut from "./AppLayOut";
 import Intro from "./Intro";
-import FundMeFriends from "./FundMeFriends";
-import UserFriends from "./UserFriends";
 import SideBar from "./SideBar"
+import SideBarNav from "./SideBarNav"
+import SideBarScope from "./SideBarScope";
+import SideBarImg from "./SideBarImg";
+import LogOut from "./LogOut"
+import SearchFundMeFriends from "./SearchFundMeFriends";
 
 
 export {
@@ -31,12 +33,14 @@ export {
     SearchFriendsScope,
     GetFriends,
     SearchFundMeUsers,
+    SearchFundMeFriends,
     Statistics,
-    Fundme,
     CheckProfile,
     AppLayOut,
     Intro,
-    FundMeFriends,
-    UserFriends,
-    SideBar
+    SideBar,
+    SideBarNav,
+    SideBarScope,
+    SideBarImg,
+    LogOut,
 }

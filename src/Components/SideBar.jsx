@@ -1,13 +1,9 @@
 import React from 'react'
-import { Outlet } from 'react-router-dom'
-import { GetFriends } from '../Components'
 
-const SideBar = () => {
+const SideBar = ({ children }) => {
   return (
-    <div>
-      <GetFriends >
-      <Outlet />
-      </GetFriends>
+    <div className='fixed bg-[#1C1D24] min-h-screen max-h-60 h-auto right-0 lg:w-80 w-full md:w-60 tablet:hidden lg:block md:block xl:block iphonesm:hidden '>
+     {children}
     </div>
   )
 }

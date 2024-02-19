@@ -2,54 +2,42 @@ body{
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  background-color: #111111;
+  background-color: #0D0D0D;
   min-height: 100vh;
   overflow-x: hidden;
 }
-/* 
-${borrowFriend || borrowBank || deposit ? 'grid grid-cols-2 lg:w-4/6 md:w-4/6 max-sm:grid-cols-1' : ''} */
 
-/* add friends style */
-/* className={`w-4/6 md:w-3/6 lg:w-2/6 max-sm:left-4 max-sm:relative  mt-5`} */
+  .card {
+    height: 300px;
+    transform-style: preserve-3d;
+    transition: transform 20s;
+    animation: flip 8s infinite linear;
+  }
 
+  .card:hover {
+    animation-play-state: paused;
+  }
 
-/* user style */
-/* className={` w-4/6 md:w-5/6 lg:w-4/6 relative grid justify-center m-auto gap-3 max-sm:left-4`} */
+  @keyframes flip {
+    0% {
+      transform: rotateY(0deg);
+    }
+    25% {
+      transform: rotateY(180deg);
+    }
+    50% {
+      transform: rotateY(0deg);
+    }
+    75% {
+      transform: rotateY(180deg);
+    }
+    100% {
+      transform: rotateY(0deg);
+    }
+  }
 
+  a.active{
+    background-color: #0D0D0D;
+    border-radius: .5rem;
+  }
 
-/* // useEffect(() => {
-  //   handleIselectedToBorrow()
-
-  //   window.addEventListener('change', handleIselectedToBorrow)
-  //   return () => {window.removeEventListener('change', handleIselectedToBorrow)}
-  // },[ handleIselectedToBorrow, borrowFriend, lender ])
-
-  // const handleDeleteFriends = (id) => {
-  //   dispatch(())
-  // }
-
-  // const handleShowBorrowBank = () => {
-
-  //   window.innerWidth <= 640 ? setShowBorrowBank((prevShowBorrowBank) => !prevShowBorrowBank) && setShowUser((prevShowUser) => !prevShowUser) : setShowBorrowBank((prevShowBorrowBank) => !prevShowBorrowBank)
-
-  //  setSelectBorrowFriend('')
-  //  setShowDeposit('')
-  //   setOpenAddUser('')
-  // };
-
-  // const handleShowDeposit = () => {
-
-  //   window.innerWidth <= 640 ? setShowDeposit((prevShowDeposit) => !prevShowDeposit) && setShowUser((prevShowUser) => !prevShowUser) : setShowDeposit((prevShowDeposit) => !prevShowDeposit)
-
-  //   setShowBorrowBank('')
-  //   setSelectBorrowFriend('')
-  //   setOpenAddUser('')
-  // }; */
-
-
-  /* // const handleSelectedAmtToDeposit = (e) => {
-    //   const depositFriend = Number(e.target.value);
-  
-    //   dispatch({ type: "depositFriend", payload: depositFriend });
-    //   dispatch({ type: "selectDeposit", payload: depositFriend })
-    // } */

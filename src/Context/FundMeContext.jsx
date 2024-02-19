@@ -140,9 +140,9 @@ function FundMeProvider({ children }) {
         }
     }
 
-    const initialStates = { borrowFriend: false, borrowBank: false, deposit: false, addFriends: false, friends: initialUsers, selectBorrow: null, searchList: '', searchFriendList: '', showIconFriends: false, taskBar: true, signIcon: true, modal: false, icon: false }
+    const initialStates = { borrowFriend: false, borrowBank: false, deposit: false, addFriends: false, friends: initialUsers, selectBorrow: null, searchList: '', searchFriendList: '',  signIcon: true, arrowIcon: false }
 
-    const [{ borrowFriend, borrowBank, deposit, addFriends, friends, depositFriend, searchFromlist, showIconFriends, modal, icon }, dispatch] = useReducer(reducer, initialStates)
+    const [{ borrowFriend, borrowBank, deposit, addFriends, friends, depositFriend, searchFromlist, arrowIcon,  }, dispatch] = useReducer(reducer, initialStates)
 
     const handleIselectedToBorrow = (lender) => {
         const compare = borrowFriend && borrowFriend.name === lender;
@@ -184,8 +184,8 @@ function FundMeProvider({ children }) {
         addFriends,
         depositFriend,
         searchFromlist,
-        showIconFriends,
         deposit,
+        arrowIcon,
         dispatch,
         onToggleAddFriends,
         onToggleBorrowFriend,
@@ -193,7 +193,7 @@ function FundMeProvider({ children }) {
         onAddUsers,
         onToggleDeposit,
         handleSearchList,
-        handleIselectedToBorrow
+        handleIselectedToBorrow,
 
     }}>{children}</fundMeContext.Provider>
 

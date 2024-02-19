@@ -1,15 +1,15 @@
 import React from 'react'
 import classNames from 'classnames';
 
-const SearchFriends = ({ placeholder, onChange, value, marginY }) => {
+const SearchFriends = ({ placeholder, onChange, value, styles }) => {
   const inputClasses = classNames(
     'py-2',
-    'lg:w-full',
-    'md:w-full',
+    'lg:w-5/6',
+    'md:w-5/6',
     'w-4/6',
     'rounded-md',
     'border-white-900',
-    'bg-stone-950',
+    'bg-[#1C1D24]',
     'text-white',
     'outline-none',
     'opacity-90',
@@ -18,19 +18,17 @@ const SearchFriends = ({ placeholder, onChange, value, marginY }) => {
     'focus:scale-y-110',
     'text-justify',
     'px-1',
-    `mt-${marginY}`
   );
 
   return (
-    <div className='flex justify-center items-center relative'>
+    <div>
       <input
         placeholder={placeholder}
         type='text'
-        className={inputClasses}
+        className={`${inputClasses} ${styles}`}
         value={value}
         onChange={onChange}
       />
-      {/* <span><img src={search} className={`absolute`} /></span> */}
     </div>
   );
 };

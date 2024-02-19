@@ -1,5 +1,5 @@
 import './Root.css'
-import {  Intro, AppLayOut, FundMeFriends, UserFriends } from './Components';
+import {  Intro, AppLayOut, SearchFundMeUsers, SearchFundMeFriends } from './Components';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 function Root() {
   return (
@@ -8,9 +8,8 @@ function Root() {
     <Routes>
       <Route path='/' element={<Intro />} />
       <Route path='app' element={<AppLayOut />}>
-        <Route index element={<p>List</p>} />
-        <Route path="usersfriends" element={<UserFriends />} />
-        <Route path='fundmefriends' element={<FundMeFriends />} />
+        <Route path='fundmeusers' element={<SearchFundMeUsers />} />
+        <Route index path='fundmefriends' element={<SearchFundMeFriends />} />
       </Route>
       <Route path='*' element={<h2 className='text-white'>not found</h2>} />
     </Routes>
