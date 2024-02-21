@@ -19,6 +19,7 @@ import SideBarScope from "./SideBarScope";
 import SideBarImg from "./SideBarImg";
 import LogOut from "./LogOut"
 import SearchFundMeFriends from "./SearchFundMeFriends";
+import SearchBarMobile from "./SearchBarMobile";
 
 
 export {
@@ -43,4 +44,5 @@ export {
     SideBarScope,
     SideBarImg,
     LogOut,
+    SearchBarMobile
 }

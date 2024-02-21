@@ -1,19 +1,15 @@
 import React from 'react';
-import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { usernav, briefcase, dropbox, close, menu, search } from '../assets';
+import { UseFundMe } from '../Context/FundMeContext';
 
 const Navbar = () => {
-    const [isOpen, setOpen] = useState(false)
-
-     function handleIsOpen () {
-        setOpen(isopen => !isopen)
-     }
-
+    const { navbar, dispatch } = UseFundMe()
     return (
         <>
             
-               { isOpen &&
+               { navbar &&
                 <div className='min-h-screen bg-stone-950 shadow-zinc-700 shadow-lg fixed left-0 w-12 grid grid-rows-1 py-10 z-50'>
                     <ul className='text-white text-[.8rem] list-none flex flex-col gap-7'>
                         <li className=' hover:bg-gray-700 py-2 rounded-full cursor-pointer'>
@@ -31,17 +27,19 @@ const Navbar = () => {
                             <em className='grid justify-center'>Deposit</em>
                         </li>
 
+                        <Link to='/getfriends'>
                         <li className=' hover:bg-gray-700 py-2 rounded-full cursor-pointer lg:hidden max-sm:visible'>
                             <img src={search} className='m-auto' />
                             <em className='grid justify-center'>Search</em>
                         </li>
+                        </Link>
                     </ul>
 
                     <h1 className='text-white'>hi</h1>
                 </div>}
 
                 
-                    <img src={`${isOpen ? close : menu}`} className={`z-50   ${isOpen ? 'fixed left-14' : 'fixed left-3 '} bg-gray-700 rounded-full p-1 top-1`} onClick={handleIsOpen}/>
+                    <img src={`${navbar ? close : menu}`} className={`z-50   ${navbar ? 'fixed left-3 top-3' : 'fixed left-0 '} bg-gray-700 rounded-full p-1 top-1`} onClick={() => dispatch({ type: "navbar" })}/>
                
         </>
     )

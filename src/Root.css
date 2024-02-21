@@ -41,3 +41,22 @@ body{
     border-radius: .5rem;
   }
 
+
+  /* {<>
+    <div className={`${className} ${navstyles} m-auto rounded-md shadow-sm shadow-[#6D7D93]`}>
+      <div className='flex justify-around h-10 items-center'>
+        <img src={`${arrowIcon ? arrowLeft : ''}`} className={`object-contain ${arrowIcon ? 'bg-[#0D0D0D]' : ''}`} />
+        <NavLink to={'fundmefriends'}>
+          <li className={`${sidestyles}`} onClick={() => dispatch({ type: "arrowIcon", payload: arrowLeft })}>
+            Friends
+          </li>
+        </NavLink>
+        <NavLink to={'fundmeusers'}>
+          <li className={` ${sidestyles}`} onClick={() => dispatch({ type: "arrowIcon", payload: arrowRight })}>
+            Users
+          </li>
+        </NavLink>
+        <img src={`${arrowIcon ? arrowRight : ''}`} className={`object-contain ${arrowIcon ? 'bg-[#0D0D0D]' : ''} `} />
+      </div>
+    </div>
+    <div> */

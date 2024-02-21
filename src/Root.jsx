@@ -1,19 +1,29 @@
 import './Root.css'
-import {  Intro, AppLayOut, SearchFundMeUsers, SearchFundMeFriends } from './Components';
+import { Intro, AppLayOut, SearchFundMeUsers, SearchFundMeFriends, SearchBarMobile } from './Components';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { FundMeProvider } from './Context/FundMeContext';
 function Root() {
   return (
-   
-    <BrowserRouter>
-    <Routes>
-      <Route path='/' element={<Intro />} />
-      <Route path='app' element={<AppLayOut />}>
-        <Route path='fundmeusers' element={<SearchFundMeUsers />} />
-        <Route index path='fundmefriends' element={<SearchFundMeFriends />} />
-      </Route>
-      <Route path='*' element={<h2 className='text-white'>not found</h2>} />
-    </Routes>
-  </BrowserRouter>
+    <FundMeProvider>
+      <BrowserRouter>
+        <Routes>
+
+          <Route path='/' element={<Intro />} />
+          <Route path='/getfriends' element={<SearchBarMobile />} >
+            <Route path='fundmeusers' element={<SearchFundMeUsers />} />
+            <Route index element={<SearchFundMeFriends />} />
+            <Route path='fundmefriends' element={<SearchFundMeFriends />} />
+          </Route>
+
+          <Route path='app' element={<AppLayOut />}>
+            <Route path='fundmeusers' element={<SearchFundMeUsers />} />
+            <Route path='fundmefriends' element={<SearchFundMeFriends />} />
+            <Route index element={<SearchFundMeFriends />} />
+          </Route>
+          <Route path='*' element={<h2 className='text-white'>not found</h2>} />
+        </Routes>
+      </BrowserRouter>
+    </FundMeProvider>
   );
 }
 
