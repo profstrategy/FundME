@@ -20,7 +20,7 @@ const UserProfile = ({ user }) => {
         <h6 className={` text-end text-xs col-end-3 ${user.balance <= 10 ? 'text-red-500' : 'text-green-500'}`}>{user.balance <= 10 ? 'Low balance' : 'Normal'}</h6>
         <CheckProfile
           user={user.balance}
-          styles={'text-sm'}
+          styles={'lg:text-sm md:text-[.6rem] tablet:text-sm iphonesm:text-[.4rem]'}
         >See profile</CheckProfile>
       </div>
     </div>

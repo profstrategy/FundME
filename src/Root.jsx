@@ -3,6 +3,7 @@ import { Intro, AppLayOut, SearchFundMeUsers, SearchFundMeFriends, SearchBarMobi
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { FundMeProvider } from './Context/FundMeContext';
 function Root() {
+  
   return (
     <FundMeProvider>
       <BrowserRouter>

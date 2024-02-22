@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom';
 import { BorrowBank, AddUser, BorrowForm, Statistics, Deposit, User, Navbar, SideBar, SideBarScope, SideBarImg, GetFriends, LogOut } from '../Components'
 import { FundMeProvider } from '../Context/FundMeContext';
 const AppLayOut = () => {
+
   return (
     <FundMeProvider>
       <div className=' grid'>

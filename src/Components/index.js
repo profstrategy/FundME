@@ -20,6 +20,7 @@ import SideBarImg from "./SideBarImg";
 import LogOut from "./LogOut"
 import SearchFundMeFriends from "./SearchFundMeFriends";
 import SearchBarMobile from "./SearchBarMobile";
+import DataContext from './DataContext'
 
 
 export {
@@ -44,5 +45,6 @@ export {
     SideBarScope,
     SideBarImg,
     LogOut,
-    SearchBarMobile
+    SearchBarMobile,
+    DataContext
 }

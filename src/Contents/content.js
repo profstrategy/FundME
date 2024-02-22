@@ -4,7 +4,7 @@ import { angleUp, close } from "../assets"
     {
         id: 46332,
         name: "Abdulrahman",
-        image: "https://i.pravatar.cc/48?u=499476",
+        image: "https://i.pravatar.cc/48?u=1",
         balance: 0,
         icon: angleUp,
         delete: close

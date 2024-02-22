@@ -6,7 +6,7 @@ import { arrowLeft, arrowRight } from '../assets'
 import { UseFundMe } from '../Context/FundMeContext'
 
 const SideBarNav = ({ sidestyles, navstyles }) => {
-  const { arrowIcon, dispatch } = UseFundMe()
+  const { arrowIcon, dispatch, getfriends } = UseFundMe()
 
   const className = classNames({
     "bg-[#1C1D24]": true,
@@ -25,7 +25,7 @@ const SideBarNav = ({ sidestyles, navstyles }) => {
           <div className='flex justify-around h-10 items-center'>
             <img src={`${arrowIcon ? arrowLeft : ''}`} className={`object-contain ${arrowIcon ? 'bg-[#0D0D0D]' : ''} tablet:fixed iphonesm:fixed tablet:top-2 tablet:left-2 tablet:w-8 iphonesm:w-8  iphonesm:top-2 iphonesm:left-2 `} />
             <NavLink to={'fundmefriends'}>
-              <li className={`${sidestyles}`} onClick={() => dispatch({ type: "arrowIcon", payload: arrowLeft })}>
+              <li className={`${sidestyles}`} onClick={() => getfriends}>
                 Friends
               </li>
             </NavLink>
