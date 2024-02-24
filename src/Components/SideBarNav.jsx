@@ -1,22 +1,28 @@
 import React from 'react'
 import classNames from 'classnames'
 import { NavLink } from 'react-router-dom'
+import { useDispatch } from 'react-redux';
 
 import { arrowLeft, arrowRight } from '../assets'
 import { UseFundMe } from '../Context/FundMeContext'
+import { DataProvider } from '../features/fetchSlice/fetchUsers'
 
 const SideBarNav = ({ sidestyles, navstyles }) => {
-  const { arrowIcon, dispatch, getfriends } = UseFundMe()
+  const { arrowIcon, dispatch, } = UseFundMe()
+  const dispatcher = useDispatch()
 
   const className = classNames({
     "bg-[#1C1D24]": true,
     "list-none": true,
     "text-white": true,
-    "w-4/6": true,
+    "w-3/6": true,
+    "iphonesm:w-3/6": true,
+    "tablet:w-3/6": true,
     "md:w-4/6": true,
     "lg:w-70": true,
     "z-50": true
   }
+
   )
   return (
     <>
@@ -25,13 +31,17 @@ const SideBarNav = ({ sidestyles, navstyles }) => {
           <div className='flex justify-around h-10 items-center'>
             <img src={`${arrowIcon ? arrowLeft : ''}`} className={`object-contain ${arrowIcon ? 'bg-[#0D0D0D]' : ''} tablet:fixed iphonesm:fixed tablet:top-2 tablet:left-2 tablet:w-8 iphonesm:w-8  iphonesm:top-2 iphonesm:left-2 `} />
             <NavLink to={'fundmefriends'}>
-              <li className={`${sidestyles}`} onClick={() => getfriends}>
+              <li className={`${sidestyles}`} onClick={() => { dispatch({ type: "arrowIcon", payload: arrowLeft }) }}>
                 Friends
               </li>
             </NavLink>
 
-            <NavLink to={'fundmeusers'}>
-              <li className={` ${sidestyles}`} onClick={() => dispatch({ type: "arrowIcon", payload: arrowRight })}>
+            <NavLink to={'fundmeusers'} >
+              <li className={` ${sidestyles}`} onClick={() => {
+                dispatcher(DataProvider())
+                dispatch({ type: "arrowIcon", payload: arrowRight })
+              }   
+            }>
                 Users
               </li>
             </NavLink>

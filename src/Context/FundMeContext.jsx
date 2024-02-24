@@ -98,24 +98,6 @@ function FundMeProvider({ children }) {
                     friends: updatedFriends,
                 };
 
-            case "getFriendList":
-
-                return {
-                    ...state,
-                    searchList: action.payload
-                };
-
-            case "searchFriendList":
-
-                const searchFriendList = state.friends.map((update) => ({
-                    ...update,
-                    isSelected: update.name === action.payload
-                }))
-
-                return {
-                    ...state,
-                    friends: searchFriendList
-                }
 
             case "showIcon":
                 return {
@@ -148,19 +130,14 @@ function FundMeProvider({ children }) {
 
                 }
 
-                case "users":
-                    return {
-                        ...state, users: action.payload
-                    }
-
             default:
                 return state
         }
     }
 
-    const initialStates = { borrowFriend: false, borrowBank: false, deposit: false, addFriends: false, friends: initialUsers, selectBorrow: null, users: {}, searchFriendList: '', signIcon: true, arrowIcon: false, navbar: false }
+    const initialStates = { borrowFriend: false, borrowBank: false, deposit: false, addFriends: false, friends: initialUsers, selectBorrow: null, signIcon: true, arrowIcon: false, navbar: false }
 
-    const [{ borrowFriend, borrowBank, deposit, addFriends, friends, depositFriend, searchFromlist, arrowIcon, navbar, users }, dispatch] = useReducer(reducer, initialStates)
+    const [{ borrowFriend, borrowBank, deposit, addFriends, friends, depositFriend, searchFromlist, arrowIcon, navbar }, dispatch] = useReducer(reducer, initialStates)
 
     const handleIselectedToBorrow = (lender) => {
         const compare = borrowFriend && borrowFriend.name === lender;
@@ -171,12 +148,7 @@ function FundMeProvider({ children }) {
         }
     };
 
-    function handleSearchList(e) {
-        const searchName = e.target.value
-        dispatch({ type: "getFriendList", payload: searchName })
-        dispatch({ type: "searchFriendList", payload: searchName })
-        
-    }
+   
 
     function onToggleBorrowFriend(friend) {
         dispatch({ type: 'toggleBorrowFriend', payload: friend })
@@ -212,7 +184,6 @@ function FundMeProvider({ children }) {
         onToggleBorrowBank,
         onAddUsers,
         onToggleDeposit,
-        handleSearchList,
         handleIselectedToBorrow,
 
     }}>{children}</fundMeContext.Provider>

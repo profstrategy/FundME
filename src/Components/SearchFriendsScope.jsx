@@ -4,8 +4,9 @@ import classNames from 'classnames';
 const SearchFriends = ({ placeholder, onChange, value, styles }) => {
   const inputClasses = classNames(
     'py-2',
-    'lg:w-5/6',
-    'md:w-5/6',
+    'lg:w-4/6',
+    'm-auto',
+    'md:w-4/6',
     'w-4/6',
     'rounded-md',
     'border-white-900',
