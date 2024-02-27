@@ -32,7 +32,7 @@ const User = () => {
 
   return (
     <>
-      {<div className={`${navbar ? "m-auto w-4/6 iphonesm:w-4/6 iphonesm:relative iphonesm:left-5" : "m-auto w-5/6 md:w-2/6 tablet:w-4/6 lg:w-2/6 iphonesm:m-auto"} `}>
+      {<div className={`${navbar ? "m-auto w-4/6 iphonesm:w-4/6 iphonesm:relative iphonesm:left-5 lg:w-2/6 md:w-2/6" : "m-auto w-5/6 md:w-2/6 tablet:w-4/6 lg:w-2/6 iphonesm:m-auto"} `}>
         <div className={`max-sm:bg-[#0D0D0D] lg:bg-white md:bg-white rounded-lg h-auto w-full shadow-zinc-700 shadow-md pb-3`}>
           <div className='flex justify-between items-center px-2 border-b-2 border-[#1C1D24] h-10'>
             <h1 className='col-end-2 max-sm:text-[#ffffff] sm:text-initial'>Users</h1>

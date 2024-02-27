@@ -1,35 +1,50 @@
 import React from 'react';
 import SearchFriendsScope from './SearchFriendsScope';
 import { useDispatch, useSelector } from 'react-redux';
-import { setInput } from '../features/fetchSlice/dataSlice';
-import { FundUsers, Skeleton, ErrorMessage } from '../Components';
+import { setNotUser, setSearchQuery, setSelectedUser } from '../features/fetchSlice/dataSlice';
+import { FundUsers, ErrorMessage, NotUser } from '../Components';
+import ListSkeleton from '../skeleton/ListSkeleton'
 
 const SearchFundMeUsers = () => {
-  const dispatch = useDispatch();
-  const { input, isLoading, data, error } = useSelector(state => state.data);
+  const dispatchQuery = useDispatch();
+  const dispatchUser = useDispatch();
+  const dispatchUserSelected = useDispatch()
+  const { searchQuery, isLoading, data, error, notUser,selectedUser } = useSelector(state => state.data);
+  let searchData = searchQuery.length > 0 ? data.filter((data) => `${data.surname} ${data.last_name}`.toLowerCase().includes(searchQuery.toLowerCase())) : data;
 
   function handleSearchList(e) {
-    dispatch(setInput(e.target.value));
+    const words = e.target.value;
+    const compare = words === selectedUser;
+    if(!data.length) return
+    dispatchQuery(setSearchQuery(words));
+    if (searchData.length === 0) {
+      dispatchUser(setNotUser(words));
+    }
+
+    dispatchUserSelected(setSelectedUser(compare))
   }
+
+
 
   return (
     <div className='bg-stone-950 overflow-y-auto h-60 tablet:h-screen iphonesm:h-screen max-h-60'>
       <SearchFriendsScope
         onChange={handleSearchList}
-        value={input}
-        styles="grid m-auto mt-5 tablet:w-4/6 tablet:left-28"
+        value={searchQuery}
+        styles="grid m-auto mt-5"
         placeholder='Search users'
       />
       <div className='sm:mt-10 iphonesm:mt-10 tablet:mt-20'>
-        {isLoading && <Skeleton />}
+        {isLoading && <ListSkeleton />}
 
-        {!isLoading && data.length > 0 && (
-          data.map(user => (
+        {!isLoading && searchData.length > 0 && (
+          searchData.map(user => (
             <FundUsers {...user} key={user.id} />
           ))
         )}
 
         {error && <ErrorMessage />}
+        {notUser && <NotUser />}
       </div>
     </div>
   );

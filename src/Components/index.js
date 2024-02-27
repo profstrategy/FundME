@@ -20,8 +20,9 @@ import LogOut from "./LogOut"
 import SearchFundMeFriends from "./SearchFundMeFriends";
 import SearchBarMobile from "./SearchBarMobile";
 import FundUsers from "./FundUsers";
-import Skeleton from "../loading/Skeleton";
 import ErrorMessage from "./ErrorMessage";
+import NotUser from "./NotUser";
+import CurrentProfile from "./CurrentProfile";
 
 
 export {
@@ -47,6 +48,7 @@ export {
     LogOut,
     SearchBarMobile,
     FundUsers,
-    Skeleton,
-    ErrorMessage
+    ErrorMessage,
+    NotUser,
+    CurrentProfile
 }
