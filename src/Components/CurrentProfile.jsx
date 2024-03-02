@@ -1,12 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { Outlet, useNavigate, useParams } from 'react-router-dom'
+import { arrowLeft } from '../assets'
 import { getProfile } from '../features/fetchSlice/fetchUsers'
 import Spinner from '../skeleton/Spinner'
 import ErrorMessage from './ErrorMessage'
+import GoBack from './GoBack'
+import UserActivity from './UserActivity'
+import UserDetails from './UserDetails'
 
 const CurrentProfile = () => {
+    const [activeTab, setActiveTab] = useState("details");
+    const [ activetTabStyle, setActiveTabStyle ] = useState(0) 
+    const  navigate = useNavigate()
     const { id } = useParams();
     const dispatch = useDispatch();
     const { profile, isLoading, error } = useSelector(store => store.data);
@@ -15,18 +22,33 @@ const CurrentProfile = () => {
         dispatch(getProfile(id));
     }, [dispatch, id]);
 
+    function handleTabChange(tab) {
+      setActiveTab(tab);
+    }
+  
+    const renderContent = () => {
+      switch (activeTab) {
+        case "details":
+          return <UserDetails userId={id} />;
+        case "useractivity":
+          return <UserActivity userId={id} />;
+        default:
+          return null;
+      }
+    };
+
     // check if profile exist
     if (!profile) {
         return <p className='text-white z-50'>Loading profile...</p>;
     }
 
 
-    const { surname, last_name, address, amount, image, phone_number, job } = profile;
+    const { last_name, amount, image } = profile;
 
     if (isLoading) return <Spinner />
     if (error) return <ErrorMessage />
     return (
-        <div className='bg-[#202225] mt-[1px] overflow-y-auto h-60 tablet:h-screen iphonesm:h-screen max-h-60'>
+        <div className='bg-[#202225] mt-[1px] overflow-y-auto lg:min-h-50 tablet:h-screen iphonesm:h-screen max-h-60'>
             <div className='flex justify-between px-2 items-center mt-2'>
                 <img src={image} className='rounded-full object-contain w-10' />
                 <div className='flex'>
@@ -36,16 +58,29 @@ const CurrentProfile = () => {
                 </div>
             </div>
 
-            <div className='bg-[#17181A] m-auto h-40 mt-3 rounded-lg w-5/6 px-3 text-white'>
-                <div className='text-stone-500 flex justify-between'>
+            <div className='bg-[#17181A] m-auto min-h-40 mt-3 rounded-lg w-5/6 px-3 text-white'>
+                <div className='text-stone-500 flex justify-between items-center '>
+                <GoBack
+               onClick={() => navigate(-1)}
+                />
                     <h4>username</h4>
                     <span className='text-white'>{`${last_name}#${id}`}</span>
                 </div>
+               
 
-                <ul className='flex justify-center gap-5 text-stone-500 border-b-green-200 mt-5'>
-                    <li>User info</li>
-                    <li>Activity</li>
+                <ul className='flex justify-around w-full items-center text-stone-500 border-b-[1px] w-full border-stone-700 mt-5 mb-2 py-2'>
+                    <li onClick={
+                        () => {handleTabChange('details')
+                        setActiveTabStyle(0)
+                    }
+                        
+                } className={`cursor-pointer ${activetTabStyle === 0 ? 'bg-[#0D0D0D] px-3 py-1 rounded-md text-white': ''}`}>User details</li>
+                    <li onClick={() => {handleTabChange('useractivity')
+                    setActiveTabStyle(1)
+                }} className={`cursor-pointer ${activetTabStyle === 1 ? 'bg-[#0D0D0D] px-3 py-1 rounded-md text-white' : ''}`}>Activity</li>
                 </ul>
+                {renderContent()}
+                <Outlet />
             </div>
         </div>
     );

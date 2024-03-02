@@ -1,7 +1,7 @@
-import { createBrowserRouter } from "react-router-dom";
-import { AppLayOut, Intro, SearchBarMobile, SearchFundMeFriends, SearchFundMeUsers } from "../Components/";
-import SearchFundMe from '../Components/FundUsers'
+import { createBrowserRouter} from "react-router-dom";
+import { AppLayOut, CurrentProfile, Intro, SearchBarMobile, SearchFundMeFriends, SearchFundMeUsers, UserActivity, UserDetails } from "../Components/";
 
+let isMobile = window.innerWidth <= 767;
 export const router = createBrowserRouter([
 
     {
@@ -10,36 +10,51 @@ export const router = createBrowserRouter([
     },
 
     {
-        path: '/app',
+        path: 'getfriends',
+        element: <SearchBarMobile />,
+            children : [
+                {
+                    path: 'fundmeusers',
+                    element: <SearchFundMeUsers />
+                },
+                {
+                    path: 'fundmefriends', element: <SearchFundMeFriends />
+                },
+                {
+                    path: 'fundmeusers/:id',
+                    element: < CurrentProfile />,
+                    children: [
+                        {
+                            path: 'userdetails',
+                            element: <UserDetails />
+                        },
+
+                        {
+                            path: 'useractivity',
+                            element: <UserActivity />
+                        }
+                    ]
+                }
+         ]
+        
+    },
+
+    {
+        path:'app', 
         element: <AppLayOut />,
         children: [
             {
-                path: 'fundmeusers',
-                element: <SearchFundMeUsers />,
+                path:'fundmeusers', element: <SearchFundMeUsers />,
             },
             {
-                path: 'fundmefriends',
-                element: <SearchFundMeFriends />,
+                path:'fundmefriends', element: <SearchFundMeFriends />,
             },
-
             {
-                path: 'getfriends',
-                element: <SearchBarMobile />,
-                children: [
-                    {
-                        path: 'fundmeusers',
-                        element: <SearchFundMe />,
-                     
-                    },
-                    {
-                        path: 'fundmefriends',
-                        element: <SearchFundMe />,
-                    
-                    },
-                ],
-            },
-        ],
-    },
-
+                path: 'fundmeusers/:id', element: <CurrentProfile />
+            } 
+        ]
+    }
    
+
+
 ])

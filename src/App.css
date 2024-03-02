@@ -3,6 +3,7 @@ body{
   padding: 0;
   margin: 0;
   background-color: #0D0D0D;
+  color: #ffffff;
   min-height: 100vh;
   overflow-x: hidden;
 }
@@ -36,9 +37,25 @@ body{
     }
   }
 
-  a.active{
+  .fundmefriends.active{
     background-color: #0D0D0D;
     border-radius: .5rem;
+  }
+
+  .fundmeusers.active{
+    background-color: #0D0D0D;
+    border-radius: .5rem;
+  }
+
+  .details.active {
+    background-color: #0D0D0D;
+    border-radius: .5rem;
+    padding: 4px;
+  }
+  .useractivity.active {
+    background-color: #0D0D0D;
+    border-radius: .5rem;
+    padding: 4px;
   }
 
 

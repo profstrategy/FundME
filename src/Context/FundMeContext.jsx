@@ -129,14 +129,14 @@ function FundMeProvider({ children }) {
                     navbar: !state.navbar,
 
                 }
-                
+
 
             default:
                 return state
         }
     }
 
-    const initialStates = { borrowFriend: false, borrowBank: false, deposit: false, addFriends: false, friends: initialUsers, selectBorrow: null, signIcon: true, arrowIcon: false, navbar: false, friendInput: true, userInput: false }
+    const initialStates = { borrowFriend: false, borrowBank: false, deposit: false, addFriends: false, friends: initialUsers, selectBorrow: null, signIcon: true, arrowIcon: false, navbar: false, friendInput: true, userInput: false, details: true, activity: false }
 
     const [{ borrowFriend, borrowBank, deposit, addFriends, friends, depositFriend, searchFromlist, arrowIcon, navbar }, dispatch] = useReducer(reducer, initialStates)
 
@@ -149,7 +149,7 @@ function FundMeProvider({ children }) {
         }
     };
 
-   
+
 
     function onToggleBorrowFriend(friend) {
         dispatch({ type: 'toggleBorrowFriend', payload: friend })

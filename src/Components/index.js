@@ -23,6 +23,9 @@ import FundUsers from "./FundUsers";
 import ErrorMessage from "./ErrorMessage";
 import NotUser from "./NotUser";
 import CurrentProfile from "./CurrentProfile";
+import UserDetails from "./UserDetails";
+import UserActivity from "./UserActivity";
+import GoBack from "./GoBack";
 
 
 export {
@@ -50,5 +53,8 @@ export {
     FundUsers,
     ErrorMessage,
     NotUser,
-    CurrentProfile
+    CurrentProfile,
+    UserDetails,
+    UserActivity,
+    GoBack
 }

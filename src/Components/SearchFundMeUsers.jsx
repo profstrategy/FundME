@@ -27,7 +27,7 @@ const SearchFundMeUsers = () => {
 
 
   return (
-    <div className='bg-stone-950 overflow-y-auto h-60 tablet:h-screen iphonesm:h-screen max-h-60'>
+    <div className='bg-stone-950 overflow-y-auto tablet:h-screen iphonesm:h-screen iphonesm:max-h-[30rem] tablet:max-h-[30rem] max-h-60'>
       <SearchFriendsScope
         onChange={handleSearchList}
         value={searchQuery}
