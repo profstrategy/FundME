@@ -1,12 +1,25 @@
-import React from 'react'
-import { arrowLeft } from '../assets'
+import React from 'react';
+import classNames from 'classnames';
 
-const GoBack = ( { onClick }) => {
+const GoBack = ({ onClick, styles = '', src, value }) => {
+    const classnames = classNames({
+        "object-contain": true,
+        "tablet:fixed": true,
+        "iphonesm:fixed": true,
+        "tablet:top-2": true,
+        "tablet:left-2": true,
+        "tablet:w-8": true,
+        "iphonesm:w-8": true,
+        "iphonesm:top-2": true,
+        "iphonesm:left-2": true
+    });
+
     return (
-        <div>
-            <img src={arrowLeft} className={`object-contain tablet:fixed iphonesm:fixed tablet:top-2 tablet:left-2 tablet:w-8 iphonesm:w-8  iphonesm:top-2 iphonesm:left-2 `} onClick={ onClick} />
+        <div className={`${classnames} ${styles}`} >
+            <img src={src} onClick={onClick} value={value} />
         </div>
-    )
+    );
 }
 
-export default GoBack
+export default GoBack;
+

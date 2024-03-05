@@ -1,13 +1,15 @@
 import React from 'react'
 import classNames from 'classnames'
-import { useNavigate, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 
-import { arrowLeft } from '../assets'
 import { DataProvider } from '../features/fetchSlice/fetchUsers'
+import { UseFundMe } from '../Context/FundMeContext';
+import { arrowLeft } from '../assets';
+
 
 const SideBarNav = ({ sidestyles, navstyles }) => {
-  const navigate = useNavigate()
+  const { dispatch } = UseFundMe()
   const dispatcher = useDispatch()
 
   const className = classNames({
@@ -27,24 +29,21 @@ const SideBarNav = ({ sidestyles, navstyles }) => {
     <>
       {<>
         <div className={`${className} ${navstyles} m-auto rounded-md shadow-sm shadow-[#6D7D93]`}>
+      
           <div className='flex justify-around h-10 items-center'>
-          <img src={arrowLeft} className={`object-contain tablet:fixed iphonesm:fixed tablet:top-2 tablet:right-2 tablet:w-8 iphonesm:w-8  iphonesm:top-2 iphonesm:right-2`} onClick={() => navigate(-1)}/>
             <NavLink to={'fundmefriends'} className='fundmefriends'>
-              <li className={`${sidestyles} border-[2px] border-white rounded-md`} onClick={() => {  
-                }}>
+              <li className={`${sidestyles} border-[2px] border-white rounded-md`}>
                 Friends
               </li>
             </NavLink>
-         
+
             <NavLink to={'fundmeusers'} className='fundmeusers'>
-              <li className={` ${sidestyles} border-[2px] border-white rounded-md`} onClick={() => {
-                dispatcher(DataProvider())
-              }
-              }>
+              <li className={` ${sidestyles} border-[2px] border-white rounded-md`} onClick={() => {dispatcher(DataProvider())
+               dispatch({ type: 'arrowBacktoFriends', payload: arrowLeft })
+              }} >
                 Users
               </li>
             </NavLink>
-            
           </div>
         </div>
         <div>

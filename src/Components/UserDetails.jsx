@@ -21,7 +21,7 @@ const UserDetails = () => {
 
     return (
 
-        <div className="relative overflow-x-auto">
+        <div className="relative overflow-x-auto mb-3">
             <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 auto">
                 <tbody>
 

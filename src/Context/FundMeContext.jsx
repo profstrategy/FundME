@@ -117,11 +117,24 @@ function FundMeProvider({ children }) {
                     showFriendModal: showFriendModal
                 }
 
-            case "arrowIcon":
-                return {
-                    ...state,
-                    arrowIcon: action.payload
-                }
+                case "arrowBacktoFriends":
+                    return {
+                      ...state,
+                      arrowBacktoFriends: action.payload
+                    };
+
+                    case "arrowBacktoUsers":
+                    return {
+                      ...state,
+                      arrowBacktoUsers: !state.arrowBacktoUsers
+                    };
+
+                  case "arrowfront":
+                    return {
+                      ...state,
+                      arrowFront: !state.arrowFront
+                    };
+    
 
             case "navbar":
                 return {
@@ -136,9 +149,9 @@ function FundMeProvider({ children }) {
         }
     }
 
-    const initialStates = { borrowFriend: false, borrowBank: false, deposit: false, addFriends: false, friends: initialUsers, selectBorrow: null, signIcon: true, arrowIcon: false, navbar: false, friendInput: true, userInput: false, details: true, activity: false }
+    const initialStates = { borrowFriend: false, borrowBank: false, deposit: false, addFriends: false, friends: initialUsers, selectBorrow: null, signIcon: true, arrowBacktoFriends: false, arrowBacktoUsers: true, navbar: false }
 
-    const [{ borrowFriend, borrowBank, deposit, addFriends, friends, depositFriend, searchFromlist, arrowIcon, navbar }, dispatch] = useReducer(reducer, initialStates)
+    const [{ borrowFriend, borrowBank, deposit, addFriends, friends, depositFriend, searchFromlist, arrowBacktoFriends, arrowBacktoUsers, arrowFront, navbar }, dispatch] = useReducer(reducer, initialStates)
 
     const handleIselectedToBorrow = (lender) => {
         const compare = borrowFriend && borrowFriend.name === lender;
@@ -177,7 +190,9 @@ function FundMeProvider({ children }) {
         depositFriend,
         searchFromlist,
         deposit,
-        arrowIcon,
+        arrowFront,
+        arrowBacktoFriends,
+        arrowBacktoUsers,
         navbar,
         dispatch,
         onToggleAddFriends,
