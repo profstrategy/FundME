@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Outlet, useNavigate, useParams } from 'react-router-dom'
+import { Outlet, useLoaderData, useNavigate, useParams } from 'react-router-dom'
 import { FundMeProvider, UseFundMe } from '../Context/FundMeContext'
 
 import { getProfile } from '../features/fetchSlice/fetchUsers'
@@ -13,14 +13,12 @@ import UserActivity from './UserActivity'
 import UserDetails from './UserDetails'
 
 const CurrentProfile = () => {
-    const [currNavigated, setcurrNavigated] = useState(false);
     const { arrowBacktoUsers } = UseFundMe();
     const [activeTab, setActiveTab] = useState("details");
     const [activetTabStyle, setActiveTabStyle] = useState(0)
-    const navigateusers = useNavigate()
     const { id } = useParams();
     const dispatch = useDispatch();
-    const { profile, isLoading, error, selectedUser } = useSelector(store => store.data);
+    const { profile, isLoading, error } = useSelector(store => store.data);
 
     useEffect(() => {
         dispatch(getProfile(id));
@@ -39,7 +37,7 @@ const CurrentProfile = () => {
     const renderContent = () => {
         switch (activeTab) {
             case "details":
-                return (<UserDetails userId={id} /> && <GoBack />);
+                return (<UserDetails userId={id} />);
             case "useractivity":
                 return <UserActivity userId={id} />;
             default:
@@ -80,7 +78,7 @@ const CurrentProfile = () => {
                     </div>
 
 
-                    <ul className='flex justify-around w-full items-center text-stone-500 border-b-[1px] w-full border-stone-700 mt-5 mb-2 py-2'>
+                    <ul className='flex justify-around w-full items-center text-stone-500 border-b-[1px] border-stone-700 mt-5 mb-2 py-2'>
                         <li onClick={
                             () => {
                                 handleTabChange('details')
@@ -100,6 +98,7 @@ const CurrentProfile = () => {
         </FundMeProvider>
     );
 };
+
 
 export default CurrentProfile;
 

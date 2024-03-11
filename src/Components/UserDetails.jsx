@@ -4,7 +4,7 @@ import Spinner from '../skeleton/Spinner';
 
 const UserDetails = () => {
     const { profile } = useSelector(store => store.data) || {};
-    if (!profile) return <Spinner />; // Handle loading state or absence of profile data
+    if (!profile) return <Spinner />
 
     const {
         surname,

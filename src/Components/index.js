@@ -26,6 +26,7 @@ import CurrentProfile from "./CurrentProfile";
 import UserDetails from "./UserDetails";
 import UserActivity from "./UserActivity";
 import GoBack from "./GoBack";
+import FriendList from "./FriendList";
 
 
 export {
@@ -56,5 +57,6 @@ export {
     CurrentProfile,
     UserDetails,
     UserActivity,
-    GoBack
+    GoBack,
+    FriendList
 }

@@ -43,19 +43,6 @@ function FundMeProvider({ children }) {
 
                 }
 
-            case "addFriends":
-                return {
-                    ...state,
-                    friends: [...state.friends, action.payload],
-                    addFriends: false
-                }
-
-            case "deleteFriends":
-                return {
-                    ...state,
-                    friends: state.friends.filter((friend) => friend.id !== action.payload.id)
-                }
-
             case "lender":
                 return {
                     ...state,
@@ -86,55 +73,24 @@ function FundMeProvider({ children }) {
                     toggleFriendList: !state.toggleFriendList ? action.payload : false,
                 }
 
-
-            case "selectBorrow":
-                const updatedFriends = state.friends.map((update) => ({
-                    ...update,
-                    isSelected: update.name === action.payload
-                }));
-
+            case "arrowBacktoFriends":
                 return {
                     ...state,
-                    friends: updatedFriends,
+                    arrowBacktoFriends: action.payload
                 };
 
-
-            case "showIcon":
+            case "arrowBacktoUsers":
                 return {
                     ...state,
-                    showIcon: !state.showIcon,
-                    toggleFriendList: true
+                    arrowBacktoUsers: !state.arrowBacktoUsers
+                };
 
-                }
-
-            case "showFriendModal":
-                const showFriendModal = state.friends.map((update) => ({
-                    ...update,
-                    nameSelected: update.name === action.payload
-                }))
+            case "arrowfront":
                 return {
                     ...state,
-                    showFriendModal: showFriendModal
-                }
+                    arrowFront: !state.arrowFront
+                };
 
-                case "arrowBacktoFriends":
-                    return {
-                      ...state,
-                      arrowBacktoFriends: action.payload
-                    };
-
-                    case "arrowBacktoUsers":
-                    return {
-                      ...state,
-                      arrowBacktoUsers: !state.arrowBacktoUsers
-                    };
-
-                  case "arrowfront":
-                    return {
-                      ...state,
-                      arrowFront: !state.arrowFront
-                    };
-    
 
             case "navbar":
                 return {
@@ -149,18 +105,10 @@ function FundMeProvider({ children }) {
         }
     }
 
-    const initialStates = { borrowFriend: false, borrowBank: false, deposit: false, addFriends: false, friends: initialUsers, selectBorrow: null, signIcon: true, arrowBacktoFriends: false, arrowBacktoUsers: true, navbar: false }
+    const initialStates = { borrowFriend: false, borrowBank: false, deposit: false, addFriends: false, selectBorrow: null, signIcon: true, arrowBacktoFriends: false, arrowBacktoUsers: true, navbar: false }
 
-    const [{ borrowFriend, borrowBank, deposit, addFriends, friends, depositFriend, searchFromlist, arrowBacktoFriends, arrowBacktoUsers, arrowFront, navbar }, dispatch] = useReducer(reducer, initialStates)
+    const [{ borrowFriend, borrowBank, deposit, addFriends, depositFriend, searchFromlist, arrowBacktoFriends, arrowBacktoUsers, arrowFront, navbar }, dispatch] = useReducer(reducer, initialStates)
 
-    const handleIselectedToBorrow = (lender) => {
-        const compare = borrowFriend && borrowFriend.name === lender;
-        dispatch({ type: "lender", payload: lender });
-
-        if (compare) {
-            dispatch({ type: "selectBorrow", payload: lender });
-        }
-    };
 
 
 
@@ -185,7 +133,6 @@ function FundMeProvider({ children }) {
     return <fundMeContext.Provider value={{
         borrowBank,
         borrowFriend,
-        friends,
         addFriends,
         depositFriend,
         searchFromlist,
@@ -200,7 +147,6 @@ function FundMeProvider({ children }) {
         onToggleBorrowBank,
         onAddUsers,
         onToggleDeposit,
-        handleIselectedToBorrow,
 
     }}>{children}</fundMeContext.Provider>
 

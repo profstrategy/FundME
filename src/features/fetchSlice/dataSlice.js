@@ -7,11 +7,12 @@ const initialState = {
     error: '',
     notUser: '',
     selectedUser: '',
-    profile: {}
+    profile: {},
+    friends: []
 };
 
 const dataSlice = createSlice({
-    name: 'users',
+    name: 'get/users',
     initialState,
     reducers: {
         fetchData(state, action) {
@@ -38,13 +39,17 @@ const dataSlice = createSlice({
             state.notUser = action.payload;
         },
 
-        setProfile(state,action) {
+        setProfile(state, action) {
             state.profile = action.payload
+        },
+
+        addFriends(state, action) {
+            state.friends.push(action.payload);
         }
     }
 });
 
-export const { fetchData, setSearchQuery, setLoading, setError, setNotUser, setSelectedUser,setProfile } = dataSlice.actions;
+export const { fetchData, setSearchQuery, setLoading, setError, setNotUser, setSelectedUser, setProfile, addFriends } = dataSlice.actions;
 export default dataSlice.reducer;
 
 
